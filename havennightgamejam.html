@@ -1,0 +1,4022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chronochet: Multi-Theme Edition (30 Stages)</title>
+    <style>
+        :root {
+            --bg-color: #09090b;
+            --text-color: #f4f4f5;
+            --sub-text: #a1a1aa;
+            --hud-bg: #18181b;
+            --hud-border: #27272a;
+            --badge-bg: #27272a;
+            --accent-1: #ff3366;
+            --accent-2: #38bdf8;
+            --canvas-border: #27272a;
+            --btn-bg: #27272a;
+            --btn-border: #3f3f46;
+            --btn-hover: #3f3f46;
+            --primary-grad: linear-gradient(135deg, #ff3366, #e11d48);
+            --primary-border: #fb7185;
+            --modal-bg: #18181b;
+        }
+
+        body.mario-theme {
+            --bg-color: #5c94fc;
+            --text-color: #ffffff;
+            --sub-text: #fef08a;
+            --hud-bg: #c84c0c;
+            --hud-border: #000000;
+            --badge-bg: #993300;
+            --accent-1: #fbd000;
+            --accent-2: #43b047;
+            --canvas-border: #000000;
+            --btn-bg: #43b047;
+            --btn-border: #000000;
+            --btn-hover: #52c956;
+            --primary-grad: linear-gradient(180deg, #fbd000, #e59400);
+            --primary-border: #000000;
+            --modal-bg: #c84c0c;
+        }
+
+        body.pacman-theme {
+            --bg-color: #000000;
+            --text-color: #ffff00;
+            --sub-text: #ffb8ff;
+            --hud-bg: #05051a;
+            --hud-border: #2121ff;
+            --badge-bg: #0a0a33;
+            --accent-1: #ffff00;
+            --accent-2: #00ffff;
+            --canvas-border: #2121ff;
+            --btn-bg: #111144;
+            --btn-border: #2121ff;
+            --btn-hover: #2121ff;
+            --primary-grad: linear-gradient(180deg, #ffff00, #eab308);
+            --primary-border: #ffff00;
+            --modal-bg: #05051a;
+        }
+
+        body.backrooms-theme {
+            --bg-color: #2b2612;
+            --text-color: #fef08a;
+            --sub-text: #d4c88a;
+            --hud-bg: #3d3518;
+            --hud-border: #857536;
+            --badge-bg: #29230e;
+            --accent-1: #facc15;
+            --accent-2: #ef4444;
+            --canvas-border: #857536;
+            --btn-bg: #4a401d;
+            --btn-border: #857536;
+            --btn-hover: #635627;
+            --primary-grad: linear-gradient(180deg, #eab308, #ca8a04);
+            --primary-border: #fef08a;
+            --modal-bg: #362f15;
+        }
+
+        body.skibidi-theme {
+            --bg-color: #111827;
+            --text-color: #f8fafc;
+            --sub-text: #38bdf8;
+            --hud-bg: #1e293b;
+            --hud-border: #38bdf8;
+            --badge-bg: #0f172a;
+            --accent-1: #38bdf8;
+            --accent-2: #ef4444;
+            --canvas-border: #38bdf8;
+            --btn-bg: #1e3a8a;
+            --btn-border: #60a5fa;
+            --btn-hover: #2563eb;
+            --primary-grad: linear-gradient(135deg, #0284c7, #ef4444);
+            --primary-border: #bae6fd;
+            --modal-bg: #1e293b;
+        }
+
+        body.minecraft-theme {
+            --bg-color: #2e4a1e;
+            --text-color: #ffffff;
+            --sub-text: #a3e635;
+            --hud-bg: #4a3520;
+            --hud-border: #1c1917;
+            --badge-bg: #291d12;
+            --accent-1: #4ade80;
+            --accent-2: #a855f7;
+            --canvas-border: #1c1917;
+            --btn-bg: #3f6212;
+            --btn-border: #1a2e05;
+            --btn-hover: #4d7c0f;
+            --primary-grad: linear-gradient(180deg, #22c55e, #15803d);
+            --primary-border: #052e16;
+            --modal-bg: #3b2a1a;
+        }
+
+        body.amongus-theme {
+            --bg-color: #030712;
+            --text-color: #f8fafc;
+            --sub-text: #38bdf8;
+            --hud-bg: #111827;
+            --hud-border: #ef4444;
+            --badge-bg: #1f2937;
+            --accent-1: #ef4444;
+            --accent-2: #22d3ee;
+            --canvas-border: #374151;
+            --btn-bg: #1f2937;
+            --btn-border: #ef4444;
+            --btn-hover: #374151;
+            --primary-grad: linear-gradient(135deg, #ef4444, #b91c1c);
+            --primary-border: #fca5a5;
+            --modal-bg: #111827;
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 10px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+
+        body.mario-theme, body.pacman-theme, body.backrooms-theme, body.minecraft-theme {
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+        }
+
+        body.mario-theme {
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(255,255,255,0.25) 0%, transparent 12%),
+                radial-gradient(circle at 85% 15%, rgba(255,255,255,0.2) 0%, transparent 15%);
+        }
+
+        body.mario-theme.underground-mode {
+            --bg-color: #040610;
+            --hud-bg: #172554;
+            --badge-bg: #1e3a8a;
+        }
+
+        body.underground-mode:not(.mario-theme):not(.pacman-theme):not(.backrooms-theme):not(.minecraft-theme):not(.amongus-theme):not(.skibidi-theme) {
+            --bg-color: #030306;
+            --hud-bg: #0f0f14;
+            --badge-bg: #181822;
+        }
+
+        body.backrooms-theme.underground-mode {
+            --bg-color: #141107;
+            --hud-bg: #1f1a0b;
+            --badge-bg: #141107;
+        }
+
+        body.minecraft-theme.underground-mode {
+            --bg-color: #0f172a;
+            --hud-bg: #1e293b;
+            --badge-bg: #0f172a;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 2.5px;
+            background: linear-gradient(90deg, #ff3366, #ff7733);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        body.mario-theme h1 {
+            background: none;
+            -webkit-text-fill-color: #fbd000;
+            color: #fbd000;
+            text-shadow: 3px 3px 0px #000000, -1px -1px 0px #000000;
+        }
+
+        body.pacman-theme h1 {
+            background: none;
+            -webkit-text-fill-color: #ffff00;
+            color: #ffff00;
+            text-shadow: 0 0 12px rgba(255, 255, 0, 0.65);
+        }
+
+        body.backrooms-theme h1 {
+            background: none;
+            -webkit-text-fill-color: #fef08a;
+            color: #fef08a;
+            text-shadow: 2px 2px 0px #000000;
+        }
+
+        body.skibidi-theme h1 {
+            background: linear-gradient(90deg, #38bdf8, #ffffff, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.minecraft-theme h1 {
+            background: none;
+            -webkit-text-fill-color: #4ade80;
+            color: #4ade80;
+            text-shadow: 3px 3px 0px #14532d;
+        }
+
+        body.amongus-theme h1 {
+            background: none;
+            -webkit-text-fill-color: #ef4444;
+            color: #ef4444;
+            text-shadow: 0 0 12px rgba(239, 68, 68, 0.7);
+        }
+
+        .subtitle {
+            margin: 3px 0 0 0;
+            color: var(--sub-text);
+            font-size: 12.5px;
+            font-weight: 600;
+        }
+
+        .hud {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+            background: var(--hud-bg);
+            border: 2px solid var(--hud-border);
+            border-radius: 10px;
+            padding: 8px 14px;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .hud-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: var(--badge-bg);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .badge span { color: var(--accent-1); }
+        .badge.blue span { color: var(--accent-2); }
+
+        .status-msg {
+            font-size: 13px;
+            font-weight: 700;
+            color: #e4e4e7;
+            text-align: right;
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .canvas-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--canvas-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            background: #121215;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            touch-action: none;
+            cursor: grab;
+        }
+
+        canvas:active { cursor: grabbing; }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            background: var(--btn-bg);
+            color: #f4f4f5;
+            border: 2px solid var(--btn-border);
+            padding: 9px 15px;
+            font-size: 13px;
+            font-weight: 800;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        button:hover {
+            background: var(--btn-hover);
+            transform: translateY(-1px);
+        }
+
+        button:active { transform: translateY(1px); }
+
+        button.primary {
+            background: var(--primary-grad);
+            border-color: var(--primary-border);
+            color: #fff;
+        }
+
+        body.mario-theme button.primary,
+        body.pacman-theme button.primary,
+        body.backrooms-theme button.primary {
+            color: #000000;
+        }
+
+        button.success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-color: #34d399;
+            color: #fff;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* ================= HOME SCREEN OVERLAY ================= */
+        .home-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at top, #1e1b4b 0%, #09090b 75%);
+            z-index: 8000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        .home-overlay.hidden {
+            display: none;
+        }
+
+        .home-card {
+            background: rgba(24, 24, 27, 0.96);
+            border: 2px solid #3f3f46;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 780px;
+            max-height: 92vh;
+            overflow-y: auto;
+            padding: 22px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+            color: #f4f4f5;
+        }
+
+        .home-hero {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .home-hero h2 {
+            margin: 0;
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, #ff3366, #facc15, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .home-hero p {
+            margin: 5px 0 0;
+            color: #a1a1aa;
+            font-size: 13px;
+        }
+
+        .home-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 680px) {
+            .home-grid { grid-template-columns: 1fr; }
+        }
+
+        .home-panel {
+            background: #121216;
+            border: 1px solid #27272a;
+            border-radius: 14px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .home-panel h3 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .home-panel p {
+            margin: 0;
+            font-size: 12px;
+            color: #a1a1aa;
+            line-height: 1.45;
+        }
+
+        .home-theme-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .home-pill {
+            padding: 7px 10px;
+            font-size: 11.5px;
+            border-radius: 7px;
+            background: #27272a;
+            border: 1px solid #3f3f46;
+            color: #e4e4e7;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .home-pill.active {
+            background: #eab308;
+            color: #000;
+            border-color: #fef08a;
+        }
+
+        .stage-select-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 7px;
+            max-height: 225px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .stage-btn {
+            padding: 8px 4px;
+            font-size: 12px;
+            border-radius: 8px;
+            background: #1e1e24;
+            border: 1px solid #3f3f46;
+            color: #f4f4f5;
+            font-weight: 800;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .stage-btn:hover {
+            border-color: #38bdf8;
+            background: #272732;
+        }
+
+        .stage-btn.dark-stage {
+            border-color: #4f46e5;
+            background: #141326;
+        }
+
+        .stage-btn small {
+            font-size: 9.5px;
+            color: #a1a1aa;
+            font-weight: 600;
+        }
+
+        /* Settings Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 16px;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        .modal-card {
+            background: var(--modal-bg);
+            border: 2px solid var(--hud-border);
+            border-radius: 14px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+            color: var(--text-color);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding-bottom: 10px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 19px;
+            font-weight: 900;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.28);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        .theme-choice-btn {
+            padding: 9px 8px;
+            font-size: 12px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.4);
+            color: #ffffff;
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        .theme-choice-btn.active {
+            border-color: #fbd000;
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+            color: #000000 !important;
+            box-shadow: 0 0 12px rgba(250, 204, 21, 0.6);
+        }
+
+        .setting-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding-right: 10px;
+        }
+
+        .setting-title { font-weight: 800; font-size: 14px; }
+        .setting-desc { font-size: 11.5px; opacity: 0.8; }
+        .close-btn { padding: 6px 12px; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+    <!-- SINGLE-PLAYER HOME SCREEN OVERLAY -->
+    <div class="home-overlay" id="homeScreen">
+        <div class="home-card">
+            <div class="home-hero">
+                <h2>⚡ Chronochet</h2>
+                <p>Multi-Theme Ricochet Parkour • 7 Playable Worlds • 30 Achievable Stages</p>
+            </div>
+
+            <div class="home-grid">
+                <!-- Theme Picker & Quick Start -->
+                <div class="home-panel">
+                    <div>
+                        <h3>🎨 1. Choose Your Universe</h3>
+                        <p style="margin-top:5px;">Each theme transforms the hero, boss AI, sound effects, and chiptune soundtrack!</p>
+                        <div class="home-theme-pills" id="homeThemePills" style="margin-top:10px;">
+                            <button type="button" class="home-pill active" data-theme="default">⚡ Cyber Neon</button>
+                            <button type="button" class="home-pill" data-theme="skibidi">🚽 Skibidi Toilet</button>
+                            <button type="button" class="home-pill" data-theme="mario">🍄 Super Mario</button>
+                            <button type="button" class="home-pill" data-theme="minecraft">⛏️ Minecraft</button>
+                            <button type="button" class="home-pill" data-theme="amongus">🚀 Among Us</button>
+                            <button type="button" class="home-pill" data-theme="pacman">👻 Pac-Man</button>
+                            <button type="button" class="home-pill" data-theme="backrooms">☣️ Backrooms</button>
+                        </div>
+                    </div>
+                    <button type="button" id="startSoloBtn" class="primary" style="width:100%; padding:12px; font-size:15px;">▶ Start Stage 1</button>
+                </div>
+
+                <!-- 30-Stage Select Grid -->
+                <div class="home-panel">
+                    <div>
+                        <h3>🗺️ 2. Select Stage (1 – 30)</h3>
+                        <p style="margin-top:5px; margin-bottom:10px;">Jump directly into any of the 30 stages (🌙 = Underground / Dark Sector):</p>
+                        <div class="stage-select-grid" id="stageSelectGrid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+        <h1 id="gameTitle">Chronochet</h1>
+        <p class="subtitle" id="gameSubtitle">Drag back from the Ninja-Bird to launch. Ricochet off <b style="color:#38bdf8">Blue Parkour Walls</b> to defeat the <b style="color:#eab308">Cyber Boss</b>!</p>
+    </div>
+
+    <div class="hud">
+        <div class="hud-group">
+            <div class="badge" id="levelBadge">STAGE <span id="levelDisplay">1 / 30</span></div>
+            <div class="badge blue" id="bounceBadge">BOUNCES <span id="bounceDisplay">0</span></div>
+        </div>
+        <div class="status-msg" id="statusText">Pull back on the red bird to aim!</div>
+    </div>
+
+    <div class="canvas-wrapper" id="canvasContainer">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <div class="controls">
+        <button type="button" id="homeBtn">🏠 Home</button>
+        <button type="button" id="resetBtn" class="primary">Reset Ball (R)</button>
+        <button type="button" id="nextBtn" class="success" style="display: none;">Next Stage &rarr;</button>
+        <button type="button" id="prevLevelBtn">Prev Stage</button>
+        <button type="button" id="skipLevelBtn">Skip Stage</button>
+        <button type="button" id="settingsBtn">⚙️ Settings</button>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>⚙️ GAME SETTINGS</h2>
+                <button type="button" id="closeSettingsBtn" class="close-btn">✕ Close</button>
+            </div>
+
+            <div class="setting-row" style="flex-direction: column; align-items: flex-start;">
+                <div class="setting-info">
+                    <span class="setting-title">🎨 World & Boss Theme</span>
+                    <span class="setting-desc">Switch characters, worlds, chiptune music & Boss AI!</span>
+                </div>
+                <div class="theme-grid" id="themeSelectorGrid">
+                    <button type="button" class="theme-choice-btn active" data-theme="default">⚡ Cyber Neon</button>
+                    <button type="button" class="theme-choice-btn" data-theme="skibidi">🚽 Skibidi Toilet</button>
+                    <button type="button" class="theme-choice-btn" data-theme="mario">🍄 Chronochet (Mario)</button>
+                    <button type="button" class="theme-choice-btn" data-theme="minecraft">⛏️ Minecraft World</button>
+                    <button type="button" class="theme-choice-btn" data-theme="amongus">🚀 Among Us Space</button>
+                    <button type="button" class="theme-choice-btn" data-theme="pacman">👻 Pac-Man Arcade</button>
+                    <button type="button" class="theme-choice-btn" data-theme="backrooms">☣️ The Backrooms</button>
+                </div>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-info">
+                    <span class="setting-title">🎵 Chiptune Music</span>
+                    <span class="setting-desc">Toggle retro background soundtrack</span>
+                </div>
+                <button type="button" id="musicToggleBtn">🔊 On</button>
+            </div>
+
+            <div class="setting-row">
+                <div class="setting-info">
+                    <span class="setting-title">🔔 Sound Effects</span>
+                    <span class="setting-desc">Jump, bounce, flush & smash audio</span>
+                </div>
+                <button type="button" id="sfxToggleBtn">🔊 On</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+(() => {
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('canvasContainer');
+
+    // Home Screen Elements
+    const homeScreen = document.getElementById('homeScreen');
+    const homeBtn = document.getElementById('homeBtn');
+    const startSoloBtn = document.getElementById('startSoloBtn');
+    const homeThemePills = document.getElementById('homeThemePills');
+    const stageSelectGrid = document.getElementById('stageSelectGrid');
+
+    const gameTitle = document.getElementById('gameTitle');
+    const gameSubtitle = document.getElementById('gameSubtitle');
+    const levelBadge = document.getElementById('levelBadge');
+    const bounceBadge = document.getElementById('bounceBadge');
+    const statusText = document.getElementById('statusText');
+    const resetBtn = document.getElementById('resetBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevLevelBtn = document.getElementById('prevLevelBtn');
+    const skipLevelBtn = document.getElementById('skipLevelBtn');
+
+    // Settings Modal Elements
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsModal = document.getElementById('settingsModal');
+    const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+    const themeSelectorGrid = document.getElementById('themeSelectorGrid');
+    const musicToggleBtn = document.getElementById('musicToggleBtn');
+    const sfxToggleBtn = document.getElementById('sfxToggleBtn');
+
+    // Theme & Audio States
+    let currentTheme = 'default';
+    let audioCtx = null;
+    let isMusicPlaying = false;
+    let isMusicEnabled = true;
+    let isSfxEnabled = true;
+    let songTimer = null;
+    let currentNoteIndex = 0;
+
+    // ==================== 30 ACHIEVABLE, PLAYTESTED STAGES ====================
+    const levels = [
+        // --- TIER 1: FOUNDATIONS (Stages 1 - 5) ---
+        {
+            name: "1. The First Wall-Kick",
+            isDark: false,
+            hint: "Stage 1: Launch past the bunker and bounce off the right blue wall to hit the Boss!",
+            anchor: { x: 140, y: 365 },
+            target: { x: 430, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 350, y: 275, w: 28, h: 160 }
+            ],
+            parkourWalls: [
+                { x: 750, y: 110, w: 26, h: 325 }
+            ]
+        },
+        {
+            name: "2. Ceiling Drop",
+            isDark: false,
+            hint: "Stage 2: Aim high at the blue ceiling pad to drop down behind the wall!",
+            anchor: { x: 140, y: 375 },
+            target: { x: 640, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 520, y: 210, w: 28, h: 225 }
+            ],
+            parkourWalls: [
+                { x: 430, y: 35, w: 260, h: 24 }
+            ]
+        },
+        {
+            name: "3. High Ledge",
+            isDark: false,
+            hint: "Stage 3: Bounce off the right blue wall to lift onto the Boss's upper platform!",
+            anchor: { x: 140, y: 375 },
+            target: { x: 580, y: 165, w: 46, h: 65 },
+            blockers: [
+                { x: 510, y: 230, w: 180, h: 24 }
+            ],
+            parkourWalls: [
+                { x: 785, y: 90, w: 26, h: 345 }
+            ]
+        },
+        {
+            name: "4. Twin Bumpers",
+            isDark: false,
+            hint: "Stage 4: Use the mid-air blue wall or far wall to ricochet into the center pocket!",
+            anchor: { x: 130, y: 375 },
+            target: { x: 480, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 390, y: 270, w: 28, h: 165 },
+                { x: 590, y: 270, w: 28, h: 165 }
+            ],
+            parkourWalls: [
+                { x: 340, y: 35, w: 340, h: 24 },
+                { x: 780, y: 120, w: 26, h: 315 }
+            ]
+        },
+        {
+            name: "5. Underground Corridor",
+            isDark: true,
+            hint: "Stage 5 (Dark Sector): Bank off the ceiling pad and right wall to crush the Boss!",
+            anchor: { x: 140, y: 375 },
+            target: { x: 740, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 630, y: 240, w: 28, h: 195 },
+                { x: 330, y: 325, w: 28, h: 110 }
+            ],
+            parkourWalls: [
+                { x: 450, y: 40, w: 260, h: 24 },
+                { x: 840, y: 110, w: 26, h: 325 }
+            ]
+        },
+
+        // --- TIER 2: BANK SHOTS & ANGLES (Stages 6 - 10) ---
+        {
+            name: "6. The Funnel",
+            isDark: false,
+            hint: "Stage 6: Thread through the wide center window and bounce back off the far blue wall!",
+            anchor: { x: 130, y: 365 },
+            target: { x: 540, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 430, y: 0, w: 28, h: 165 },
+                { x: 430, y: 295, w: 28, h: 140 }
+            ],
+            parkourWalls: [
+                { x: 790, y: 90, w: 26, h: 345 }
+            ]
+        },
+        {
+            name: "7. Over the Wall",
+            isDark: false,
+            hint: "Stage 7: Lob over the tall center barrier and rebound off the right blue wall!",
+            anchor: { x: 130, y: 380 },
+            target: { x: 570, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 460, y: 195, w: 30, h: 240 }
+            ],
+            parkourWalls: [
+                { x: 775, y: 80, w: 26, h: 355 }
+            ]
+        },
+        {
+            name: "8. Corner Pocket",
+            isDark: false,
+            hint: "Stage 8: Bank into the upper-right corner pads to drop onto the guarded Boss!",
+            anchor: { x: 140, y: 375 },
+            target: { x: 730, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 640, y: 220, w: 28, h: 215 }
+            ],
+            parkourWalls: [
+                { x: 610, y: 35, w: 230, h: 24 },
+                { x: 845, y: 65, w: 26, h: 370 }
+            ]
+        },
+        {
+            name: "9. Low Skimmer",
+            isDark: false,
+            hint: "Stage 9: Shoot underneath the hanging wall and bounce off the right blue bumper!",
+            anchor: { x: 140, y: 380 },
+            target: { x: 560, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 460, y: 0, w: 30, h: 315 }
+            ],
+            parkourWalls: [
+                { x: 770, y: 180, w: 26, h: 255 }
+            ]
+        },
+        {
+            name: "10. Midnight Cavern",
+            isDark: true,
+            hint: "Stage 10 (Dark Sector): Ricochet off the lower-right pad up to the elevated Boss!",
+            anchor: { x: 135, y: 375 },
+            target: { x: 650, y: 145, w: 46, h: 65 },
+            blockers: [
+                { x: 580, y: 210, w: 170, h: 24 },
+                { x: 350, y: 0, w: 26, h: 220 }
+            ],
+            parkourWalls: [
+                { x: 825, y: 95, w: 26, h: 340 }
+            ]
+        },
+
+        // --- TIER 3: DOUBLE RICOCHETS (Stages 11 - 15) ---
+        {
+            name: "11. Ninja Zig-Zag",
+            isDark: false,
+            hint: "Stage 11: Ping-pong between the two vertical blue walls to climb up to the Boss!",
+            anchor: { x: 130, y: 380 },
+            target: { x: 745, y: 135, w: 48, h: 65 },
+            blockers: [
+                { x: 685, y: 200, w: 155, h: 24 }
+            ],
+            parkourWalls: [
+                { x: 375, y: 145, w: 24, h: 290 },
+                { x: 555, y: 80, w: 24, h: 280 }
+            ]
+        },
+        {
+            name: "12. Sky Bridge",
+            isDark: false,
+            hint: "Stage 12: Bounce off the far right wall and skip across the upper blue pad!",
+            anchor: { x: 135, y: 375 },
+            target: { x: 340, y: 135, w: 46, h: 65 },
+            blockers: [
+                { x: 280, y: 200, w: 170, h: 24 }
+            ],
+            parkourWalls: [
+                { x: 790, y: 90, w: 26, h: 345 },
+                { x: 500, y: 35, w: 220, h: 22 }
+            ]
+        },
+        {
+            name: "13. Dual Pillars",
+            isDark: false,
+            hint: "Stage 13: Weave over the first pillar, under the second, and bank off the back wall!",
+            anchor: { x: 130, y: 375 },
+            target: { x: 600, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 310, y: 275, w: 26, h: 160 },
+                { x: 500, y: 0, w: 26, h: 295 }
+            ],
+            parkourWalls: [
+                { x: 795, y: 130, w: 26, h: 305 }
+            ]
+        },
+        {
+            name: "14. Split Gate",
+            isDark: false,
+            hint: "Stage 14: Aim through the center gap and bounce off the angled ceiling/wall combo!",
+            anchor: { x: 135, y: 370 },
+            target: { x: 660, y: 230, w: 46, h: 65 },
+            blockers: [
+                { x: 610, y: 295, w: 150, h: 24 },
+                { x: 430, y: 0, w: 26, h: 185 },
+                { x: 430, y: 310, w: 26, h: 125 }
+            ],
+            parkourWalls: [
+                { x: 825, y: 80, w: 26, h: 355 },
+                { x: 530, y: 35, w: 220, h: 22 }
+            ]
+        },
+        {
+            name: "15. Deep Sub-Level",
+            isDark: true,
+            hint: "Stage 15 (Dark Sector): Thread the center gap and bounce back onto the upper Boss!",
+            anchor: { x: 130, y: 370 },
+            target: { x: 265, y: 140, w: 46, h: 65 },
+            blockers: [
+                { x: 210, y: 205, w: 150, h: 24 },
+                { x: 480, y: 0, w: 28, h: 220 },
+                { x: 480, y: 335, w: 28, h: 100 }
+            ],
+            parkourWalls: [
+                { x: 785, y: 80, w: 26, h: 355 },
+                { x: 550, y: 35, w: 210, h: 22 }
+            ]
+        },
+
+        // --- TIER 4: ELEVATION & REBOUNDS (Stages 16 - 20) ---
+        {
+            name: "16. Elevator Shaft",
+            isDark: false,
+            hint: "Stage 16: Wall-kick between the right shaft walls to boost straight up to the top!",
+            anchor: { x: 140, y: 380 },
+            target: { x: 710, y: 115, w: 46, h: 65 },
+            blockers: [
+                { x: 645, y: 180, w: 165, h: 24 }
+            ],
+            parkourWalls: [
+                { x: 595, y: 120, w: 24, h: 315 },
+                { x: 835, y: 70, w: 26, h: 365 }
+            ]
+        },
+        {
+            name: "17. Roof Bounce",
+            isDark: false,
+            hint: "Stage 17: Bounce off the long blue ceiling rail to clear both floor bunkers!",
+            anchor: { x: 130, y: 380 },
+            target: { x: 740, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 350, y: 250, w: 28, h: 185 },
+                { x: 630, y: 240, w: 28, h: 195 }
+            ],
+            parkourWalls: [
+                { x: 310, y: 35, w: 440, h: 24 },
+                { x: 840, y: 130, w: 26, h: 305 }
+            ]
+        },
+        {
+            name: "18. Canyon Leap",
+            isDark: false,
+            hint: "Stage 18: Launch from the high cliff and ricochet off the far wall into the canyon!",
+            anchor: { x: 140, y: 175 },
+            target: { x: 520, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 85, y: 245, w: 130, h: 190 },
+                { x: 435, y: 270, w: 28, h: 165 }
+            ],
+            parkourWalls: [
+                { x: 780, y: 90, w: 26, h: 345 }
+            ]
+        },
+        {
+            name: "19. Fortress Bunker",
+            isDark: false,
+            hint: "Stage 19: The Boss is boxed in on the sides—drop in from the top blue ceiling pad!",
+            anchor: { x: 135, y: 375 },
+            target: { x: 545, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 475, y: 265, w: 26, h: 170 },
+                { x: 635, y: 265, w: 26, h: 170 }
+            ],
+            parkourWalls: [
+                { x: 440, y: 35, w: 250, h: 24 },
+                { x: 790, y: 110, w: 26, h: 325 }
+            ]
+        },
+        {
+            name: "20. Shadow Vault",
+            isDark: true,
+            hint: "Stage 20 (Dark Sector): Bank off the right wall and ceiling pad to infiltrate the vault!",
+            anchor: { x: 135, y: 375 },
+            target: { x: 675, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 585, y: 205, w: 28, h: 230 },
+                { x: 340, y: 0, w: 26, h: 230 }
+            ],
+            parkourWalls: [
+                { x: 540, y: 35, w: 260, h: 24 },
+                { x: 830, y: 90, w: 26, h: 345 }
+            ]
+        },
+
+        // --- TIER 5: PRECISION & MOMENTUM (Stages 21 - 25) ---
+        {
+            name: "21. Pinball Alley",
+            isDark: false,
+            hint: "Stage 21: Ricochet down the staggered blue bumpers to reach the far corner Boss!",
+            anchor: { x: 130, y: 375 },
+            target: { x: 775, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 430, y: 255, w: 28, h: 180 },
+                { x: 685, y: 245, w: 28, h: 190 }
+            ],
+            parkourWalls: [
+                { x: 350, y: 35, w: 180, h: 24 },
+                { x: 600, y: 35, w: 210, h: 24 },
+                { x: 850, y: 100, w: 26, h: 335 }
+            ]
+        },
+        {
+            name: "22. Floating Islands",
+            isDark: false,
+            hint: "Stage 22: Bounce off the right wall to land on the upper-middle sky island!",
+            anchor: { x: 135, y: 380 },
+            target: { x: 475, y: 150, w: 46, h: 65 },
+            blockers: [
+                { x: 425, y: 215, w: 155, h: 24 },
+                { x: 260, y: 300, w: 110, h: 22 }
+            ],
+            parkourWalls: [
+                { x: 785, y: 80, w: 26, h: 355 }
+            ]
+        },
+        {
+            name: "23. Chimney Drop",
+            isDark: false,
+            hint: "Stage 23: Shoot over the left chimney wall and bounce off the right wall into the shaft!",
+            anchor: { x: 130, y: 380 },
+            target: { x: 655, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 575, y: 185, w: 28, h: 250 },
+                { x: 755, y: 255, w: 28, h: 180 }
+            ],
+            parkourWalls: [
+                { x: 560, y: 35, w: 240, h: 24 },
+                { x: 845, y: 80, w: 26, h: 355 }
+            ]
+        },
+        {
+            name: "24. Crossfire Walls",
+            isDark: false,
+            hint: "Stage 24: Use the alternating blue parkour walls to snake across the arena!",
+            anchor: { x: 130, y: 375 },
+            target: { x: 765, y: 165, w: 46, h: 65 },
+            blockers: [
+                { x: 710, y: 230, w: 140, h: 24 },
+                { x: 495, y: 0, w: 26, h: 240 }
+            ],
+            parkourWalls: [
+                { x: 355, y: 155, w: 24, h: 280 },
+                { x: 625, y: 140, w: 24, h: 295 },
+                { x: 845, y: 60, w: 26, h: 220 }
+            ]
+        },
+        {
+            name: "25. Abyssal Chamber",
+            isDark: true,
+            hint: "Stage 25 (Dark Sector): Launch from the upper perch and rebound off the right wall!",
+            anchor: { x: 145, y: 165 },
+            target: { x: 335, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 90, y: 235, w: 130, h: 200 },
+                { x: 445, y: 255, w: 28, h: 180 }
+            ],
+            parkourWalls: [
+                { x: 785, y: 80, w: 26, h: 355 },
+                { x: 310, y: 35, w: 230, h: 22 }
+            ]
+        },
+
+        // --- TIER 6: GRANDMASTER GAUNTLET (Stages 26 - 30) ---
+        {
+            name: "26. Serpent Path",
+            isDark: false,
+            hint: "Stage 26: Go under the first gate, over the second bunker, and bounce back!",
+            anchor: { x: 130, y: 380 },
+            target: { x: 615, y: 365, w: 46, h: 70 },
+            blockers: [
+                { x: 315, y: 0, w: 26, h: 300 },
+                { x: 515, y: 240, w: 28, h: 195 }
+            ],
+            parkourWalls: [
+                { x: 790, y: 90, w: 26, h: 345 }
+            ]
+        },
+        {
+            name: "27. Mirror Maze",
+            isDark: false,
+            hint: "Stage 27: Bank off the ceiling pad to send your shot back toward the left upper deck!",
+            anchor: { x: 140, y: 375 },
+            target: { x: 250, y: 145, w: 46, h: 65 },
+            blockers: [
+                { x: 195, y: 210, w: 165, h: 24 },
+                { x: 520, y: 235, w: 28, h: 200 }
+            ],
+            parkourWalls: [
+                { x: 780, y: 85, w: 26, h: 350 },
+                { x: 440, y: 35, w: 260, h: 22 }
+            ]
+        },
+        {
+            name: "28. Sky Citadel",
+            isDark: false,
+            hint: "Stage 28: Climb the double blue wall-jump tower to reach the Citadel roof Boss!",
+            anchor: { x: 130, y: 380 },
+            target: { x: 695, y: 110, w: 46, h: 65 },
+            blockers: [
+                { x: 635, y: 175, w: 165, h: 24 },
+                { x: 330, y: 290, w: 26, h: 145 }
+            ],
+            parkourWalls: [
+                { x: 465, y: 135, w: 24, h: 300 },
+                { x: 830, y: 65, w: 26, h: 370 }
+            ]
+        },
+        {
+            name: "29. Core Reactor",
+            isDark: true,
+            hint: "Stage 29 (Dark Sector): Thread the reactor core and ricochet off the far wall!",
+            anchor: { x: 130, y: 370 },
+            target: { x: 645, y: 215, w: 46, h: 65 },
+            blockers: [
+                { x: 590, y: 280, w: 160, h: 24 },
+                { x: 410, y: 0, w: 26, h: 185 },
+                { x: 410, y: 315, w: 26, h: 120 }
+            ],
+            parkourWalls: [
+                { x: 825, y: 75, w: 26, h: 360 },
+                { x: 510, y: 35, w: 220, h: 22 }
+            ]
+        },
+        {
+            name: "30. Omega Finale",
+            isDark: true,
+            hint: "STAGE 30 FINALE: Thread the central gate, bank off the far wall & ceiling to defeat the Final Boss!",
+            anchor: { x: 130, y: 375 },
+            target: { x: 310, y: 135, w: 48, h: 65 },
+            blockers: [
+                { x: 255, y: 200, w: 165, h: 24 },
+                { x: 515, y: 0, w: 28, h: 215 },
+                { x: 515, y: 335, w: 28, h: 100 },
+                { x: 675, y: 275, w: 26, h: 160 }
+            ],
+            parkourWalls: [
+                { x: 820, y: 75, w: 26, h: 360 },
+                { x: 575, y: 35, w: 215, h: 22 }
+            ]
+        }
+    ];
+
+    // Build 30-Stage Select Grid on Home Screen
+    function buildStageSelectGrid() {
+        stageSelectGrid.innerHTML = '';
+        levels.forEach((lvl, idx) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'stage-btn' + (lvl.isDark ? ' dark-stage' : '');
+            btn.innerHTML = `<span>${idx + 1}${lvl.isDark ? ' 🌙' : ''}</span><small>Stage ${idx + 1}</small>`;
+            btn.title = lvl.name;
+            btn.addEventListener('click', () => {
+                startBackgroundMusic();
+                homeScreen.classList.add('hidden');
+                loadLevel(idx, false);
+            });
+            stageSelectGrid.appendChild(btn);
+        });
+    }
+    buildStageSelectGrid();
+
+    // Home Screen Listeners
+    homeThemePills.addEventListener('click', (e) => {
+        const pill = e.target.closest('.home-pill');
+        if (!pill) return;
+        currentTheme = pill.dataset.theme;
+        document.querySelectorAll('.home-pill').forEach(p => p.classList.toggle('active', p.dataset.theme === currentTheme));
+        applyThemeUI();
+        playSfx('parkour');
+    });
+
+    startSoloBtn.addEventListener('click', () => {
+        startBackgroundMusic();
+        homeScreen.classList.add('hidden');
+        loadLevel(0, false);
+    });
+
+    homeBtn.addEventListener('click', () => {
+        homeScreen.classList.remove('hidden');
+        document.querySelectorAll('.home-pill').forEach(p => p.classList.toggle('active', p.dataset.theme === currentTheme));
+    });
+
+    // ==================== CHIPTUNE MELODIES ====================
+    const defaultMelodyNotes = [
+        220, 0, 220, 330, 293.66, 261.63, 220, 196,
+        220, 0, 220, 392, 330, 0, 293.66, 261.63,
+        174.61, 0, 174.61, 261.63, 220, 196, 174.61, 164.81,
+        196, 220, 261.63, 293.66, 330, 392, 440, 0
+    ];
+
+    const skibidiMelodyNotes = [
+        329.63, 329.63, 392.00, 440.00, 329.63, 0, 493.88, 440.00,
+        392.00, 329.63, 293.66, 329.63, 0, 392.00, 440.00, 0,
+        523.25, 493.88, 440.00, 392.00, 440.00, 0, 329.63, 0,
+        392.00, 392.00, 329.63, 293.66, 329.63, 0, 0, 0
+    ];
+
+    const marioMelodyNotes = [
+        659.25, 659.25, 0, 659.25, 0, 523.25, 659.25, 0,
+        783.99, 0, 0, 0, 392.00, 0, 0, 0,
+        523.25, 0, 0, 392.00, 0, 0, 329.63, 0,
+        0, 440.00, 0, 493.88, 0, 466.16, 440.00, 0,
+        392.00, 659.25, 783.99, 880.00, 0, 698.46, 783.99, 0,
+        659.25, 0, 523.25, 587.33, 493.88, 0, 0, 0
+    ];
+
+    const marioUndergroundNotes = [
+        261.63, 523.25, 220.00, 440.00, 233.08, 466.16, 0, 0,
+        261.63, 523.25, 220.00, 440.00, 233.08, 466.16, 0, 0,
+        174.61, 349.23, 146.83, 293.66, 155.56, 311.13, 0, 0,
+        174.61, 349.23, 146.83, 293.66, 155.56, 311.13, 0, 0
+    ];
+
+    const minecraftMelodyNotes = [
+        329.63, 0, 493.88, 0, 440.00, 0, 329.63, 0,
+        293.66, 0, 392.00, 0, 329.63, 0, 0, 0,
+        329.63, 0, 587.33, 0, 493.88, 0, 440.00, 0,
+        392.00, 0, 329.63, 0, 293.66, 0, 0, 0
+    ];
+
+    const amongusMelodyNotes = [
+        261.63, 0, 311.13, 0, 349.23, 0, 369.99, 0,
+        349.23, 0, 311.13, 0, 261.63, 0, 0, 0,
+        233.08, 293.66, 261.63, 0, 0, 0, 196.00, 0,
+        261.63, 0, 311.13, 0, 349.23, 369.99, 349.23, 311.13
+    ];
+
+    const pacmanMelodyNotes = [
+        493.88, 987.77, 739.99, 622.25, 987.77, 739.99, 622.25, 0,
+        523.25, 1046.50, 783.99, 659.25, 1046.50, 783.99, 659.25, 0,
+        493.88, 987.77, 739.99, 622.25, 987.77, 739.99, 622.25, 0,
+        622.25, 659.25, 698.46, 0, 698.46, 739.99, 783.99, 987.77
+    ];
+
+    const backroomsMelodyNotes = [
+        110.00, 0, 116.54, 0, 110.00, 0, 103.83, 0,
+        98.00, 0, 0, 110.00, 0, 82.41, 0, 0,
+        130.81, 0, 123.47, 0, 110.00, 0, 0, 98.00,
+        87.31, 0, 82.41, 0, 73.42, 0, 0, 0
+    ];
+
+    const darkDefaultNotes = [
+        110, 0, 110, 165, 146.83, 130.81, 110, 98,
+        110, 0, 110, 196, 165, 0, 146.83, 130.81,
+        87.31, 0, 87.31, 130.81, 110, 98, 87.31, 82.41,
+        98, 110, 130.81, 146.83, 165, 196, 220, 0
+    ];
+
+    const noteDuration = 0.15;
+
+    function isDarkLevel() {
+        return levels[currentLevelIndex] && levels[currentLevelIndex].isDark;
+    }
+
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    }
+
+    function playTone(freq, duration, wave = 'square', vol = 0.07) {
+        if (!audioCtx || freq === 0) return;
+        try {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = wave;
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        } catch (e) {}
+    }
+
+    function playSfx(type) {
+        if (!isSfxEnabled) return;
+        initAudio();
+        if (!audioCtx) return;
+
+        if (type === 'launch') {
+            if (currentTheme === 'skibidi') {
+                playTone(280, 0.08, 'sawtooth', 0.1);
+                setTimeout(() => playTone(560, 0.12, 'square', 0.1), 60);
+            } else if (currentTheme === 'minecraft') {
+                playTone(520, 0.08, 'triangle', 0.12);
+                setTimeout(() => playTone(780, 0.1, 'sine', 0.1), 50);
+            } else if (currentTheme === 'amongus') {
+                playTone(261.63, 0.09, 'square', 0.1);
+                setTimeout(() => playTone(311.13, 0.12, 'square', 0.1), 70);
+            } else if (currentTheme === 'mario') {
+                playTone(330, 0.15, 'square', 0.1);
+            } else if (currentTheme === 'pacman') {
+                playTone(360, 0.07, 'triangle', 0.12);
+                setTimeout(() => playTone(540, 0.08, 'triangle', 0.12), 65);
+            } else {
+                playTone(320, 0.12, 'triangle', 0.1);
+            }
+        } else if (type === 'parkour') {
+            if (currentTheme === 'minecraft') {
+                playTone(190, 0.1, 'sine', 0.14);
+                setTimeout(() => playTone(280, 0.12, 'sine', 0.12), 50);
+            } else if (currentTheme === 'skibidi') {
+                playTone(620, 0.07, 'square', 0.1);
+                setTimeout(() => playTone(880, 0.1, 'square', 0.1), 55);
+            } else {
+                playTone(587.33, 0.1, 'sine', 0.1);
+            }
+        } else if (type === 'alert') {
+            if (currentTheme === 'minecraft') {
+                playTone(160, 0.12, 'sawtooth', 0.11);
+                setTimeout(() => playTone(220, 0.14, 'sawtooth', 0.11), 80);
+            } else if (currentTheme === 'skibidi') {
+                playTone(440, 0.07, 'square', 0.1);
+                setTimeout(() => playTone(329.63, 0.09, 'square', 0.1), 65);
+            } else if (currentTheme === 'pacman') {
+                playTone(880, 0.06, 'square', 0.09);
+                setTimeout(() => playTone(1174.66, 0.08, 'square', 0.09), 55);
+            } else if (currentTheme === 'backrooms') {
+                playTone(92, 0.14, 'sawtooth', 0.11);
+            }
+        } else if (type === 'bump') {
+            playTone(130, 0.08, 'triangle', 0.12);
+        } else if (type === 'pipe') {
+            playTone(392.00, 0.09, 'square', 0.11);
+            setTimeout(() => playTone(329.63, 0.09, 'square', 0.11), 95);
+            setTimeout(() => playTone(261.63, 0.14, 'square', 0.11), 190);
+        } else if (type === 'stomp') {
+            if (currentTheme === 'skibidi') {
+                playTone(587.33, 0.08, 'sawtooth', 0.12);
+                setTimeout(() => playTone(293.66, 0.15, 'sawtooth', 0.12), 70);
+                setTimeout(() => playTone(146.83, 0.25, 'sawtooth', 0.12), 150);
+            } else {
+                playTone(440, 0.06, 'square', 0.12);
+                setTimeout(() => playTone(659.25, 0.12, 'square', 0.12), 55);
+            }
+        } else if (type === 'victory') {
+            playTone(523.25, 0.1, 'square', 0.1);
+            setTimeout(() => playTone(659.25, 0.1, 'square', 0.1), 90);
+            setTimeout(() => playTone(783.99, 0.22, 'square', 0.1), 180);
+        }
+    }
+
+    function startBackgroundMusic() {
+        if (!isMusicEnabled || isMusicPlaying) return;
+        initAudio();
+        isMusicPlaying = true;
+        currentNoteIndex = 0;
+        if (songTimer) clearInterval(songTimer);
+
+        songTimer = setInterval(() => {
+            if (!isMusicPlaying || !isMusicEnabled) return;
+            const dark = isDarkLevel();
+            let activeMelody;
+            let waveType = 'triangle';
+            let vol = 0.055;
+
+            if (currentTheme === 'skibidi') {
+                activeMelody = skibidiMelodyNotes;
+                waveType = 'square';
+                vol = 0.048;
+            } else if (currentTheme === 'minecraft') {
+                activeMelody = minecraftMelodyNotes;
+                waveType = 'sine';
+                vol = 0.07;
+            } else if (currentTheme === 'amongus') {
+                activeMelody = amongusMelodyNotes;
+                waveType = 'triangle';
+                vol = 0.06;
+            } else if (currentTheme === 'mario') {
+                activeMelody = dark ? marioUndergroundNotes : marioMelodyNotes;
+                waveType = 'square';
+            } else if (currentTheme === 'pacman') {
+                activeMelody = pacmanMelodyNotes;
+                waveType = 'square';
+                vol = 0.05;
+            } else if (currentTheme === 'backrooms') {
+                activeMelody = backroomsMelodyNotes;
+                waveType = 'sawtooth';
+                vol = 0.04;
+            } else {
+                activeMelody = dark ? darkDefaultNotes : defaultMelodyNotes;
+                waveType = dark ? 'sawtooth' : 'triangle';
+                vol = dark ? 0.045 : 0.06;
+            }
+
+            const note = activeMelody[currentNoteIndex % activeMelody.length];
+            playTone(note, noteDuration, waveType, vol);
+            currentNoteIndex = (currentNoteIndex + 1) % activeMelody.length;
+        }, noteDuration * 1000);
+    }
+
+    function stopBackgroundMusic() {
+        isMusicPlaying = false;
+        if (songTimer) {
+            clearInterval(songTimer);
+            songTimer = null;
+        }
+    }
+
+    // Settings Modal Listeners
+    settingsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        startBackgroundMusic();
+        settingsModal.classList.add('open');
+    });
+
+    closeSettingsBtn.addEventListener('click', () => {
+        settingsModal.classList.remove('open');
+    });
+
+    settingsModal.addEventListener('click', (e) => {
+        if (e.target === settingsModal) {
+            settingsModal.classList.remove('open');
+        }
+    });
+
+    musicToggleBtn.addEventListener('click', () => {
+        isMusicEnabled = !isMusicEnabled;
+        if (isMusicEnabled) {
+            musicToggleBtn.innerText = "🔊 On";
+            startBackgroundMusic();
+        } else {
+            musicToggleBtn.innerText = "🔇 Off";
+            stopBackgroundMusic();
+        }
+    });
+
+    sfxToggleBtn.addEventListener('click', () => {
+        isSfxEnabled = !isSfxEnabled;
+        sfxToggleBtn.innerText = isSfxEnabled ? "🔊 On" : "🔇 Off";
+        if (isSfxEnabled) playSfx('parkour');
+    });
+
+    function applyThemeUI() {
+        const lvl = levels[currentLevelIndex];
+        const dark = isDarkLevel();
+        const total = levels.length;
+        const num = currentLevelIndex + 1;
+
+        document.body.classList.remove(
+            'mario-theme', 'pacman-theme', 'backrooms-theme',
+            'skibidi-theme', 'minecraft-theme', 'amongus-theme', 'underground-mode'
+        );
+        if (dark) document.body.classList.add('underground-mode');
+
+        document.querySelectorAll('.theme-choice-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.theme === currentTheme);
+        });
+        document.querySelectorAll('.home-pill').forEach(p => {
+            p.classList.toggle('active', p.dataset.theme === currentTheme);
+        });
+
+        if (currentTheme === 'skibidi') {
+            document.body.classList.add('skibidi-theme');
+            gameTitle.innerText = dark ? "SKIBIDI CHRONOCHET // NIGHT RAID" : "SKIBIDI CHRONOCHET: CAMERAMAN VS TOILET";
+            gameSubtitle.innerHTML = 'Launch the <b style="color:#38bdf8">Cameraman</b> off <b style="color:#60a5fa">Flush Energy Walls</b> to flush the <b style="color:#ef4444">Skibidi Toilet Boss</b>!';
+            levelBadge.innerHTML = `EPISODE <span>${num} / ${total}${dark ? ' 🎥' : ''}</span>`;
+            bounceBadge.innerHTML = `RICOCHETS <span id="bounceDisplay">${bounceCount}</span>`;
+            resetBtn.innerText = "Reset Cam (R)";
+            nextBtn.innerHTML = "Next Episode &rarr;";
+            prevLevelBtn.innerText = "Prev Ep";
+            skipLevelBtn.innerText = "Skip Ep";
+            statusText.innerText = gameState === STATE_VICTORY ? `SKIBIDI TOILET FLUSHED in ${bounceCount} bounce(s)!` : lvl.hint;
+        } else if (currentTheme === 'minecraft') {
+            document.body.classList.add('minecraft-theme');
+            gameTitle.innerText = dark ? "MINECRAFT CHRONOCHET // DEEP DARK" : "MINECRAFT CHRONOCHET: ENDER PEARL";
+            gameSubtitle.innerHTML = 'Throw the <b style="color:#a855f7">Ender Pearl</b> off <b style="color:#4ade80">Slime Blocks</b> to defeat the <b style="color:#22c55e">Creeper Boss</b>!';
+            levelBadge.innerHTML = `BIOME <span>${num} / ${total}${dark ? ' 🦇' : ''}</span>`;
+            bounceBadge.innerHTML = `BOUNCES <span id="bounceDisplay">${bounceCount}</span>`;
+            resetBtn.innerText = "New Pearl (R)";
+            nextBtn.innerHTML = "Next Biome &rarr;";
+            prevLevelBtn.innerText = "Prev Biome";
+            skipLevelBtn.innerText = "Teleport Skip";
+            statusText.innerText = gameState === STATE_VICTORY ? `CREEPER DEFEATED in ${bounceCount} bounce(s)!` : lvl.hint;
+        } else if (currentTheme === 'amongus') {
+            document.body.classList.add('amongus-theme');
+            gameTitle.innerText = dark ? "AMONG US // REACTOR MELTDOWN" : "AMONG US: CREWMATE RICOCHET";
+            gameSubtitle.innerHTML = 'Launch <b style="color:#ef4444">Red Crewmate</b> off <b style="color:#22d3ee">Shield Bumpers</b> to eject the <b style="color:#a855f7">Purple Impostor</b>!';
+            levelBadge.innerHTML = `TASK <span>${num} / ${total}${dark ? ' 🚨' : ''}</span>`;
+            bounceBadge.innerHTML = `BOUNCES <span id="bounceDisplay">${bounceCount}</span>`;
+            resetBtn.innerText = "Respawn (R)";
+            nextBtn.innerHTML = "Next Task &rarr;";
+            prevLevelBtn.innerText = "Prev Task";
+            skipLevelBtn.innerText = "Vent Skip";
+            statusText.innerText = gameState === STATE_VICTORY ? `IMPOSTOR EJECTED in ${bounceCount} bounce(s)!` : lvl.hint;
+        } else if (currentTheme === 'mario') {
+            document.body.classList.add('mario-theme');
+            gameTitle.innerText = dark ? "CHRONOCHET BROS (UNDERGROUND)" : "CHRONOCHET BROS";
+            gameSubtitle.innerHTML = 'Pull back from the <b style="color:#43b047; text-shadow:1px 1px 0 #000">Warp Pipe</b>! Bounce off <b style="color:#fbd000; text-shadow:1px 1px 0 #000">Note Blocks</b> to stomp the <b style="color:#ffffff; text-shadow:1px 1px 0 #000">Goomba</b>!';
+            levelBadge.innerHTML = `WORLD <span>1-${num} / ${total}${dark ? ' 🌙' : ''}</span>`;
+            bounceBadge.innerHTML = `JUMPS <span id="bounceDisplay">${bounceCount}</span>`;
+            resetBtn.innerText = "Retry Pipe (R)";
+            nextBtn.innerHTML = "Warp Next &rarr;";
+            prevLevelBtn.innerText = "Prev World";
+            skipLevelBtn.innerText = "Warp Skip";
+            statusText.innerText = gameState === STATE_VICTORY ? `GOOMBA STOMPED in ${bounceCount} jump(s)!` : lvl.hint;
+        } else if (currentTheme === 'pacman') {
+            document.body.classList.add('pacman-theme');
+            gameTitle.innerText = dark ? "PAC-CHRONOCHET // MIDNIGHT MAZE" : "PAC-CHRONOCHET ARCADE";
+            gameSubtitle.innerHTML = 'Launch <b style="color:#ffff00">Pac-Man</b> off <b style="color:#00ffff">Cyan Bumpers</b>! Watch out—<b style="color:#ffb8ff">Pinky</b> charges as soon as she spots you!';
+            levelBadge.innerHTML = `STAGE <span>${num} / ${total}${dark ? ' 🍒' : ''}</span>`;
+            bounceBadge.innerHTML = `RICOCHETS <span id="bounceDisplay">${bounceCount}</span>`;
+            resetBtn.innerText = "Reset Pac (R)";
+            nextBtn.innerHTML = "Next Maze &rarr;";
+            prevLevelBtn.innerText = "Prev Maze";
+            skipLevelBtn.innerText = "Warp Maze";
+            statusText.innerText = gameState === STATE_VICTORY ? `PINKY CHOMPED in ${bounceCount} bounce(s)!` : lvl.hint;
+        } else if (currentTheme === 'backrooms') {
+            document.body.classList.add('backrooms-theme');
+            gameTitle.innerText = dark ? "THE BACKROOMS // LIGHTS OUT" : "THE BACKROOMS // LEVEL 0";
+            gameSubtitle.innerHTML = 'Launch the <b style="color:#facc15">Hazmat Explorer</b> off <b style="color:#ef4444">Hazard Walls</b> to neutralize the <b style="color:#ffffff">Bacteria Entity</b>!';
+            levelBadge.innerHTML = `ROOM <span>${num} / ${total}${dark ? ' 🔦' : ''}</span>`;
+            bounceBadge.innerHTML = `IMPACTS <span id="bounceDisplay">${bounceCount}</span>`;
+            resetBtn.innerText = "Re-Enter (R)";
+            nextBtn.innerHTML = "No-Clip Next &rarr;";
+            prevLevelBtn.innerText = "Prev Room";
+            skipLevelBtn.innerText = "No-Clip Skip";
+            statusText.innerText = gameState === STATE_VICTORY ? `ENTITY NEUTRALIZED in ${bounceCount} bounce(s)!` : lvl.hint;
+        } else {
+            gameTitle.innerText = dark ? "Chronochet // Void" : "Chronochet";
+            gameSubtitle.innerHTML = 'Drag back from the Ninja-Bird to launch. Ricochet off <b style="color:#38bdf8">Blue Parkour Walls</b> to defeat the <b style="color:#eab308">Cyber Boss</b>!';
+            levelBadge.innerHTML = `STAGE <span id="levelDisplay">${num} / ${total}${dark ? ' 🌑' : ''}</span>`;
+            bounceBadge.innerHTML = `BOUNCES <span id="bounceDisplay">${bounceCount}</span>`;
+            resetBtn.innerText = "Reset Ball (R)";
+            nextBtn.innerHTML = "Next Stage &rarr;";
+            prevLevelBtn.innerText = "Prev Stage";
+            skipLevelBtn.innerText = "Skip Stage";
+            statusText.innerText = gameState === STATE_VICTORY ? `BOSS DEFEATED in ${bounceCount} bounce(s)!` : lvl.hint;
+        }
+        currentNoteIndex = 0;
+    }
+
+    themeSelectorGrid.addEventListener('click', (e) => {
+        const btn = e.target.closest('.theme-choice-btn');
+        if (!btn) return;
+        currentTheme = btn.dataset.theme;
+        applyThemeUI();
+        playSfx('victory');
+        const burstColor = currentTheme === 'skibidi' ? '#38bdf8'
+                         : currentTheme === 'minecraft' ? '#4ade80'
+                         : currentTheme === 'amongus' ? '#ef4444'
+                         : currentTheme === 'mario' ? '#fbd000' 
+                         : currentTheme === 'pacman' ? '#ffff00' 
+                         : currentTheme === 'backrooms' ? '#facc15' 
+                         : '#38bdf8';
+        spawnParticles(player.x, player.y, burstColor, 24, 6);
+    });
+
+    // Virtual resolution
+    const V_WIDTH = 900;
+    const V_HEIGHT = 506;
+    const GROUND_Y = 435;
+
+    function resizeCanvas() {
+        const rect = container.getBoundingClientRect();
+        canvas.width = rect.width * window.devicePixelRatio;
+        canvas.height = rect.height * window.devicePixelRatio;
+        ctx.setTransform(canvas.width / V_WIDTH, 0, 0, canvas.height / V_HEIGHT, 0, 0);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const STATE_IDLE = 'IDLE';
+    const STATE_DRAGGING = 'DRAGGING';
+    const STATE_AIRBORNE = 'AIRBORNE';
+    const STATE_VICTORY = 'VICTORY';
+    const STATE_WARPING = 'WARPING';
+
+    let gameState = STATE_IDLE;
+    let currentLevelIndex = 0;
+    let bounceCount = 0;
+    let particles = [];
+    let screenShake = 0;
+    let frameTick = 0;
+
+    let warpAnim = {
+        active: false,
+        phase: 'NONE',
+        progress: 0,
+        targetLevel: 0,
+        startX: 0,
+        startY: 0,
+        playerScale: 1,
+        irisRadius: V_WIDTH
+    };
+
+    let player = {
+        x: 140,
+        y: 365,
+        vx: 0,
+        vy: 0,
+        radius: 16,
+        trail: [],
+        rotation: 0
+    };
+
+    let target = {
+        x: 0, y: 0,
+        baseX: 0, baseY: 0,
+        vx: 0, vy: 0,
+        w: 46, h: 70,
+        alive: true,
+        squashedTimer: 0,
+        alerted: false,
+        patrolDir: 1,
+        twitchTimer: 0,
+        creeperFuse: 0
+    };
+
+    let anchor = { x: 140, y: 365 };
+    let blockers = [];
+    let parkourWalls = [];
+
+    function getMarioPipeTopY() {
+        return anchor.y + player.radius + 2;
+    }
+
+    function updateBounceHUD() {
+        const el = document.getElementById('bounceDisplay');
+        if (el) el.innerText = bounceCount;
+    }
+
+    function resetTargetPosition() {
+        const lvl = levels[currentLevelIndex];
+        target.x = lvl.target.x;
+        target.y = lvl.target.y;
+        target.baseX = lvl.target.x;
+        target.baseY = lvl.target.y;
+        target.w = lvl.target.w;
+        target.h = lvl.target.h;
+        target.vx = 0;
+        target.vy = 0;
+        target.alive = true;
+        target.squashedTimer = 0;
+        target.alerted = false;
+        target.patrolDir = 1;
+        target.twitchTimer = 0;
+        target.creeperFuse = 0;
+    }
+
+    function applyLevelData(index) {
+        currentLevelIndex = (index + levels.length) % levels.length;
+        const lvl = levels[currentLevelIndex];
+
+        anchor = { ...lvl.anchor };
+        resetTargetPosition();
+        blockers = lvl.blockers.map(b => ({ ...b }));
+        parkourWalls = lvl.parkourWalls.map(w => ({ ...w }));
+
+        player.x = anchor.x;
+        player.y = anchor.y;
+        player.vx = 0;
+        player.vy = 0;
+        player.trail = [];
+        player.rotation = 0;
+        bounceCount = 0;
+        updateBounceHUD();
+
+        nextBtn.style.display = 'none';
+        applyThemeUI();
+    }
+
+    function loadLevel(index, useWarp = false) {
+        const nextIdx = (index + levels.length) % levels.length;
+        if (!useWarp) {
+            applyLevelData(nextIdx);
+            gameState = STATE_IDLE;
+            warpAnim.active = false;
+            return;
+        }
+
+        if (warpAnim.active) return;
+        startBackgroundMusic();
+        playSfx('pipe');
+
+        gameState = STATE_WARPING;
+        warpAnim.active = true;
+        warpAnim.phase = 'ENTER';
+        warpAnim.progress = 0;
+        warpAnim.targetLevel = nextIdx;
+        warpAnim.startX = player.x;
+        warpAnim.startY = player.y;
+        warpAnim.playerScale = 1;
+        warpAnim.irisRadius = V_WIDTH;
+        player.trail = [];
+        statusText.innerText = `Warping to Stage ${nextIdx + 1}...`;
+    }
+
+    function resetBall() {
+        if (warpAnim.active) return;
+        player.x = anchor.x;
+        player.y = anchor.y;
+        player.vx = 0;
+        player.vy = 0;
+        player.trail = [];
+        player.rotation = 0;
+        bounceCount = 0;
+        updateBounceHUD();
+
+        resetTargetPosition();
+        gameState = STATE_IDLE;
+        nextBtn.style.display = 'none';
+        statusText.innerText = levels[currentLevelIndex].hint;
+    }
+
+    function spawnParticles(x, y, color, count = 18, speed = 6) {
+        for (let i = 0; i < count; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const vel = (Math.random() * 0.7 + 0.3) * speed;
+            particles.push({
+                x, y,
+                vx: Math.cos(angle) * vel,
+                vy: Math.sin(angle) * vel,
+                size: Math.random() * 5 + 2,
+                color,
+                alpha: 1,
+                decay: Math.random() * 0.03 + 0.02
+            });
+        }
+    }
+
+    function getVirtualCoords(e) {
+        const rect = canvas.getBoundingClientRect();
+        let clientX, clientY;
+        if (e.touches && e.touches.length > 0) {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+        } else {
+            clientX = e.clientX;
+            clientY = e.clientY;
+        }
+        return {
+            x: ((clientX - rect.left) / rect.width) * V_WIDTH,
+            y: ((clientY - rect.top) / rect.height) * V_HEIGHT
+        };
+    }
+
+    function handleStart(e) {
+        if (settingsModal.classList.contains('open') || !homeScreen.classList.contains('hidden')) return;
+        startBackgroundMusic();
+        if (gameState !== STATE_IDLE) return;
+        const pos = getVirtualCoords(e);
+        if (Math.hypot(pos.x - player.x, pos.y - player.y) < 60) {
+            gameState = STATE_DRAGGING;
+        }
+    }
+
+    function handleMove(e) {
+        if (gameState !== STATE_DRAGGING) return;
+        if (e.cancelable) e.preventDefault();
+        const pos = getVirtualCoords(e);
+
+        let dx = pos.x - anchor.x;
+        let dy = pos.y - anchor.y;
+        const maxPull = 105;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist > maxPull) {
+            dx = (dx / dist) * maxPull;
+            dy = (dy / dist) * maxPull;
+        }
+
+        player.x = anchor.x + dx;
+        player.y = anchor.y + dy;
+    }
+
+    function handleEnd() {
+        if (gameState !== STATE_DRAGGING) return;
+        const pullX = anchor.x - player.x;
+        const pullY = anchor.y - player.y;
+
+        if (Math.hypot(pullX, pullY) > 8) {
+            player.vx = pullX * 0.35;
+            player.vy = pullY * 0.35;
+            gameState = STATE_AIRBORNE;
+            bounceCount = 0;
+            player.trail = [];
+            playSfx('launch');
+            statusText.innerText = "Airborne! Ricochet off the blue walls to hit the Boss!";
+        } else {
+            resetBall();
+        }
+    }
+
+    canvas.addEventListener('mousedown', handleStart);
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('mouseup', handleEnd);
+
+    canvas.addEventListener('touchstart', handleStart, { passive: false });
+    window.addEventListener('touchmove', handleMove, { passive: false });
+    window.addEventListener('touchend', handleEnd);
+
+    window.addEventListener('keydown', (e) => {
+        if (settingsModal.classList.contains('open')) {
+            if (e.key === 'Escape') settingsModal.classList.remove('open');
+            return;
+        }
+        if (!homeScreen.classList.contains('hidden')) return;
+        startBackgroundMusic();
+        if (e.key === 'r' || e.key === 'R') resetBall();
+        if (e.key === ' ' && gameState === STATE_VICTORY) {
+            e.preventDefault();
+            loadLevel(currentLevelIndex + 1, true);
+        }
+    });
+
+    resetBtn.addEventListener('click', () => { startBackgroundMusic(); resetBall(); });
+    nextBtn.addEventListener('click', () => loadLevel(currentLevelIndex + 1, true));
+    prevLevelBtn.addEventListener('click', () => loadLevel(currentLevelIndex - 1, true));
+    skipLevelBtn.addEventListener('click', () => loadLevel(currentLevelIndex + 1, true));
+
+    // Line-of-Sight Ray Check
+    function hasLineOfSight(x1, y1, x2, y2) {
+        const steps = 16;
+        for (let i = 1; i < steps; i++) {
+            const t = i / steps;
+            const px = x1 + (x2 - x1) * t;
+            const py = y1 + (y2 - y1) * t;
+            for (const b of blockers) {
+                if (px >= b.x && px <= b.x + b.w && py >= b.y && py <= b.y + b.h) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    function overlapsBlocker(rx, ry, rw, rh) {
+        for (const b of blockers) {
+            if (rx < b.x + b.w && rx + rw > b.x && ry < b.y + b.h && ry + rh > b.y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Distinct Boss AI Movements per Theme
+    function updateBossAI() {
+        if (!target.alive) return;
+
+        const tCenterX = target.x + target.w / 2;
+        const tCenterY = target.y + target.h / 2;
+        const distToPlayer = Math.hypot(player.x - tCenterX, player.y - tCenterY);
+        const canSeePlayer = hasLineOfSight(tCenterX, tCenterY, player.x, player.y);
+
+        if (currentTheme === 'backrooms') {
+            target.twitchTimer++;
+            const zoneMinX = target.baseX - 38;
+            const zoneMaxX = target.baseX + 38;
+            const zoneMinY = target.baseY - 12;
+            const zoneMaxY = target.baseY;
+
+            if (gameState === STATE_AIRBORNE && (canSeePlayer || distToPlayer < 360)) {
+                if (!target.alerted) {
+                    target.alerted = true;
+                    playSfx('alert');
+                }
+                if (target.twitchTimer % 16 === 0) {
+                    const dirX = Math.sign(player.x - tCenterX) || 1;
+                    target.vx = dirX * 2.8;
+                    target.vy = (player.y < tCenterY - 20) ? -1.5 : 0.7;
+                }
+                const nextX = Math.max(zoneMinX, Math.min(zoneMaxX, target.x + target.vx));
+                const nextY = Math.max(zoneMinY, Math.min(zoneMaxY, target.y + target.vy));
+                if (!overlapsBlocker(nextX, nextY, target.w, target.h)) {
+                    target.x = nextX;
+                    target.y = nextY;
+                }
+                target.vx *= 0.82;
+                target.vy *= 0.82;
+            } else {
+                target.alerted = false;
+                const nextX = target.x + target.patrolDir * 0.9;
+                if (nextX > zoneMaxX || overlapsBlocker(nextX, target.baseY, target.w, target.h)) {
+                    target.patrolDir = -1;
+                } else if (nextX < zoneMinX || overlapsBlocker(nextX, target.baseY, target.w, target.h)) {
+                    target.patrolDir = 1;
+                } else {
+                    target.x = nextX;
+                }
+                target.y = target.baseY;
+            }
+        } else if (currentTheme === 'skibidi') {
+            const nextX = target.baseX + Math.sin(frameTick * 0.05) * 24;
+            if (!overlapsBlocker(nextX, target.baseY, target.w, target.h)) target.x = nextX;
+            target.y = target.baseY + Math.abs(Math.sin(frameTick * 0.14)) * -5;
+            target.alerted = (gameState === STATE_AIRBORNE && distToPlayer < 280);
+        } else if (currentTheme === 'minecraft') {
+            const nextX = target.baseX + Math.sin(frameTick * 0.04) * 24;
+            if (!overlapsBlocker(nextX, target.baseY, target.w, target.h)) target.x = nextX;
+            target.y = target.baseY;
+            if (gameState === STATE_AIRBORNE && distToPlayer < 210) {
+                if (!target.alerted) {
+                    target.alerted = true;
+                    playSfx('alert');
+                }
+                target.creeperFuse = Math.min(1, target.creeperFuse + 0.04);
+            } else {
+                target.alerted = false;
+                target.creeperFuse = Math.max(0, target.creeperFuse - 0.05);
+            }
+        } else if (currentTheme === 'amongus') {
+            const nextX = target.baseX + Math.sin(frameTick * 0.05) * 26;
+            if (!overlapsBlocker(nextX, target.baseY, target.w, target.h)) target.x = nextX;
+            target.y = target.baseY;
+            target.alerted = (gameState === STATE_AIRBORNE && distToPlayer < 260);
+        } else if (currentTheme === 'pacman') {
+            if (gameState === STATE_AIRBORNE && (canSeePlayer || distToPlayer < 400)) {
+                if (!target.alerted) {
+                    target.alerted = true;
+                    playSfx('alert');
+                    spawnParticles(tCenterX, tCenterY, '#ffb8ff', 10, 3.5);
+                }
+                const angle = Math.atan2(player.y - tCenterY, player.x - tCenterX);
+                const chargeSpeed = 2.8;
+                target.vx = Math.cos(angle) * chargeSpeed;
+                target.vy = Math.sin(angle) * chargeSpeed * 0.6;
+                target.x += target.vx;
+                target.y += target.vy;
+            } else {
+                target.alerted = false;
+                const nextX = target.x + target.patrolDir * 1.0;
+                if (nextX > target.baseX + 28 || overlapsBlocker(nextX, target.baseY, target.w, target.h)) target.patrolDir = -1;
+                else if (nextX < target.baseX - 28 || overlapsBlocker(nextX, target.baseY, target.w, target.h)) target.patrolDir = 1;
+                else target.x = nextX;
+                target.y = target.baseY + Math.sin(frameTick * 0.08) * 5;
+            }
+        } else if (currentTheme === 'mario') {
+            const marchSpeed = (gameState === STATE_AIRBORNE && distToPlayer < 300) ? 1.4 : 0.85;
+            const nextX = target.x + target.patrolDir * marchSpeed;
+            if (nextX > target.baseX + 30 || overlapsBlocker(nextX, target.baseY, target.w, target.h)) target.patrolDir = -1;
+            else if (nextX < target.baseX - 30 || overlapsBlocker(nextX, target.baseY, target.w, target.h)) target.patrolDir = 1;
+            else target.x = nextX;
+
+            if (gameState === STATE_AIRBORNE && distToPlayer < 220 && target.y >= target.baseY - 1) {
+                target.vy = -3.8;
+            }
+            if (target.y < target.baseY || target.vy < 0) {
+                target.vy += 0.35;
+                target.y += target.vy;
+                if (target.y >= target.baseY) {
+                    target.y = target.baseY;
+                    target.vy = 0;
+                }
+            }
+        } else {
+            const nextX = target.baseX + Math.sin(frameTick * 0.04) * 22;
+            if (!overlapsBlocker(nextX, target.baseY, target.w, target.h)) target.x = nextX;
+            target.y = target.baseY + Math.cos(frameTick * 0.06) * 6;
+        }
+
+        target.x = Math.max(210, Math.min(V_WIDTH - target.w - 16, target.x));
+        target.y = Math.max(20, Math.min(GROUND_Y - target.h, target.y));
+    }
+
+    function resolveCircleRect(circle, rect, bounceFactor, isParkourWall) {
+        const closestX = Math.max(rect.x, Math.min(circle.x, rect.x + rect.w));
+        const closestY = Math.max(rect.y, Math.min(circle.y, rect.y + rect.h));
+
+        const dx = circle.x - closestX;
+        const dy = circle.y - closestY;
+        const distSq = dx * dx + dy * dy;
+
+        if (distSq < circle.radius * circle.radius) {
+            const dist = Math.sqrt(distSq);
+            let nx, ny, overlap;
+
+            if (dist === 0) {
+                nx = 1;
+                ny = 0;
+                overlap = circle.radius;
+            } else {
+                overlap = circle.radius - dist;
+                nx = dx / dist;
+                ny = dy / dist;
+            }
+
+            circle.x += nx * overlap;
+            circle.y += ny * overlap;
+
+            const dot = circle.vx * nx + circle.vy * ny;
+            if (dot < 0) {
+                circle.vx = (circle.vx - 2 * dot * nx) * bounceFactor;
+                circle.vy = (circle.vy - 2 * dot * ny) * bounceFactor;
+
+                if (isParkourWall) {
+                    if (Math.abs(nx) > 0.5) {
+                        circle.vy -= 3.8;
+                        circle.vx *= 1.08;
+                    }
+                    playSfx('parkour');
+                    const pColor = currentTheme === 'skibidi' ? '#38bdf8'
+                                 : currentTheme === 'minecraft' ? '#4ade80'
+                                 : currentTheme === 'amongus' ? '#22d3ee'
+                                 : currentTheme === 'mario' ? '#fbd000' 
+                                 : currentTheme === 'pacman' ? '#00ffff' 
+                                 : currentTheme === 'backrooms' ? '#ef4444' 
+                                 : '#38bdf8';
+                    spawnParticles(closestX, closestY, pColor, 16, 5);
+                    screenShake = 5;
+                } else {
+                    playSfx('bump');
+                    spawnParticles(closestX, closestY, '#a1a1aa', 8, 3);
+                }
+
+                bounceCount++;
+                updateBounceHUD();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    function update() {
+        frameTick++;
+        if (screenShake > 0) screenShake *= 0.85;
+        if (screenShake < 0.2) screenShake = 0;
+
+        if (target.squashedTimer > 0) target.squashedTimer--;
+
+        if (warpAnim.active) {
+            const pipeLipY = getMarioPipeTopY();
+            if (warpAnim.phase === 'ENTER') {
+                warpAnim.progress += 0.036;
+                const t = Math.min(1, warpAnim.progress);
+                const pipeCenterX = anchor.x;
+                const aboveLipY = pipeLipY - player.radius - 4;
+
+                if (t < 0.45) {
+                    const sub = t / 0.45;
+                    const ease = 1 - Math.pow(1 - sub, 3);
+                    player.x = warpAnim.startX + (pipeCenterX - warpAnim.startX) * ease;
+                    player.y = warpAnim.startY + (aboveLipY - warpAnim.startY) * ease - Math.sin(sub * Math.PI) * 32;
+                    player.rotation += 0.16;
+                } else {
+                    const sub = (t - 0.45) / 0.55;
+                    player.x = pipeCenterX;
+                    player.y = aboveLipY + sub * 46;
+                    player.rotation = 0;
+                    warpAnim.playerScale = Math.max(0.55, 1 - sub * 0.35);
+                }
+                warpAnim.irisRadius = V_WIDTH * (1 - Math.pow(t, 1.6));
+
+                if (warpAnim.progress >= 1) {
+                    applyLevelData(warpAnim.targetLevel);
+                    warpAnim.phase = 'EXIT';
+                    warpAnim.progress = 0;
+                    player.x = anchor.x;
+                    player.y = getMarioPipeTopY() + 26;
+                    warpAnim.playerScale = 0.72;
+                    spawnParticles(anchor.x, anchor.y, '#38bdf8', 16, 4);
+                }
+            } else if (warpAnim.phase === 'EXIT') {
+                warpAnim.progress += 0.04;
+                const t = Math.min(1, warpAnim.progress);
+                const ease = 1 - Math.pow(1 - t, 3);
+                const startSubmergedY = getMarioPipeTopY() + 26;
+                player.x = anchor.x;
+                player.y = startSubmergedY + (anchor.y - startSubmergedY) * ease;
+                warpAnim.playerScale = 0.72 + 0.28 * ease;
+                warpAnim.irisRadius = V_WIDTH * Math.pow(t, 1.4);
+
+                if (warpAnim.progress >= 1) {
+                    warpAnim.active = false;
+                    warpAnim.phase = 'NONE';
+                    warpAnim.playerScale = 1;
+                    player.x = anchor.x;
+                    player.y = anchor.y;
+                    gameState = STATE_IDLE;
+                }
+            }
+        } else {
+            updateBossAI();
+        }
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.12;
+            p.alpha -= p.decay;
+            if (p.alpha <= 0) particles.splice(i, 1);
+        }
+
+        if (gameState === STATE_AIRBORNE) {
+            player.vy += 0.32;
+            player.x += player.vx;
+            player.y += player.vy;
+            player.rotation += player.vx * 0.04;
+
+            player.trail.push({ x: player.x, y: player.y });
+            if (player.trail.length > 32) player.trail.shift();
+
+            if (player.y + player.radius >= GROUND_Y) {
+                player.y = GROUND_Y - player.radius;
+                if (Math.abs(player.vy) > 2.0) {
+                    player.vy = -player.vy * 0.62;
+                    player.vx *= 0.90;
+                    bounceCount++;
+                    updateBounceHUD();
+                    playSfx('bump');
+                    spawnParticles(player.x, GROUND_Y, '#71717a', 6, 3);
+                } else {
+                    player.vy = 0;
+                    player.vx *= 0.88;
+                }
+
+                if (Math.abs(player.vx) < 0.3 && Math.abs(player.vy) < 0.4) {
+                    player.vx = 0;
+                    player.vy = 0;
+                    if (target.alive) {
+                        statusText.innerText = "Stopped! Press Reset (R) to launch again!";
+                    }
+                }
+            }
+
+            if (player.x - player.radius <= 0) {
+                player.x = player.radius;
+                player.vx = -player.vx * 0.85;
+                bounceCount++;
+                updateBounceHUD();
+            } else if (player.x + player.radius >= V_WIDTH) {
+                player.x = V_WIDTH - player.radius;
+                player.vx = -player.vx * 0.85;
+                bounceCount++;
+                updateBounceHUD();
+            }
+            if (player.y - player.radius <= 0) {
+                player.y = player.radius;
+                player.vy = -player.vy * 0.85;
+                bounceCount++;
+                updateBounceHUD();
+            }
+
+            blockers.forEach(b => resolveCircleRect(player, b, 0.78, false));
+            parkourWalls.forEach(w => resolveCircleRect(player, w, 0.95, true));
+
+            if (target.alive) {
+                const closestX = Math.max(target.x, Math.min(player.x, target.x + target.w));
+                const closestY = Math.max(target.y, Math.min(player.y, target.y + target.h));
+                const dist = Math.hypot(player.x - closestX, player.y - closestY);
+
+                if (dist < player.radius) {
+                    target.alive = false;
+                    target.squashedTimer = 38;
+                    gameState = STATE_VICTORY;
+                    screenShake = 14;
+                    playSfx('stomp');
+                    setTimeout(() => playSfx('victory'), 110);
+
+                    const hitCol1 = currentTheme === 'skibidi' ? '#38bdf8'
+                                  : currentTheme === 'minecraft' ? '#4ade80'
+                                  : currentTheme === 'amongus' ? '#a855f7'
+                                  : currentTheme === 'mario' ? '#9a3412' 
+                                  : currentTheme === 'pacman' ? '#ffb8ff' 
+                                  : currentTheme === 'backrooms' ? '#18181b' 
+                                  : '#fbd000';
+
+                    spawnParticles(target.x + target.w / 2, target.y + target.h / 2, hitCol1, 36, 9);
+                    spawnParticles(target.x + target.w / 2, target.y + target.h / 2, '#ffffff', 25, 7);
+
+                    const isFinal = currentLevelIndex === levels.length - 1;
+                    statusText.innerText = isFinal
+                        ? `🏆 ALL 30 STAGES CONQUERED in ${bounceCount} bounce(s)! You are the Chronochet Champion!`
+                        : `STAGE ${currentLevelIndex + 1} CLEARED in ${bounceCount} bounce(s)! Press Space or Next Stage!`;
+                    nextBtn.innerText = isFinal ? "Play Again (Stage 1) →" : "Next Stage →";
+                    nextBtn.style.display = 'inline-block';
+                }
+            }
+        }
+    }
+
+    function drawTrajectoryPreview() {
+        if (gameState !== STATE_DRAGGING) return;
+        const pullX = anchor.x - player.x;
+        const pullY = anchor.y - player.y;
+        let simX = player.x;
+        let simY = player.y;
+        let simVx = pullX * 0.35;
+        let simVy = pullY * 0.35;
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
+        for (let i = 0; i < 20; i++) {
+            simVy += 0.32;
+            simX += simVx;
+            simY += simVy;
+            if (i % 2 === 0) {
+                ctx.beginPath();
+                ctx.arc(simX, simY, 4 - i * 0.12, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+    }
+
+    // ==================== SKIBIDI TOILET THEME RENDERERS ====================
+    function drawSkibidiBackground() {
+        const dark = isDarkLevel();
+        ctx.fillStyle = dark ? '#0b1120' : '#1e293b';
+        ctx.fillRect(0, 0, V_WIDTH, V_HEIGHT);
+
+        ctx.strokeStyle = dark ? 'rgba(56, 189, 248, 0.08)' : 'rgba(148, 163, 184, 0.12)';
+        ctx.lineWidth = 1.5;
+        for (let x = 0; x < V_WIDTH; x += 50) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, GROUND_Y); ctx.stroke();
+        }
+        for (let y = 0; y < GROUND_Y; y += 50) {
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(V_WIDTH, y); ctx.stroke();
+        }
+
+        ctx.fillStyle = dark ? '#0f172a' : '#334155';
+        ctx.fillRect(0, GROUND_Y, V_WIDTH, V_HEIGHT - GROUND_Y);
+        ctx.fillStyle = '#38bdf8';
+        ctx.fillRect(0, GROUND_Y, V_WIDTH, 4);
+    }
+
+    function drawCameramanPlayer() {
+        const r = player.radius;
+
+        // Tailored Black Suit Torso & Shoulders
+        const suitGrad = ctx.createLinearGradient(-r, -4, r, r);
+        suitGrad.addColorStop(0, '#27272a');
+        suitGrad.addColorStop(1, '#09090b');
+        ctx.fillStyle = suitGrad;
+        ctx.beginPath();
+        ctx.roundRect(-r * 0.85, 2, r * 1.7, r * 0.88, [6, 6, 12, 12]);
+        ctx.fill();
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 1.8;
+        ctx.stroke();
+
+        // Suit Lapels, Crisp White Shirt & Crimson Tie
+        ctx.fillStyle = '#f8fafc';
+        ctx.beginPath();
+        ctx.moveTo(-6, 4);
+        ctx.lineTo(6, 4);
+        ctx.lineTo(0, 15);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.fillStyle = '#dc2626';
+        ctx.beginPath();
+        ctx.moveTo(-2, 5);
+        ctx.lineTo(2, 5);
+        ctx.lineTo(2.5, 13);
+        ctx.lineTo(0, 15.5);
+        ctx.lineTo(-2.5, 13);
+        ctx.closePath();
+        ctx.fill();
+
+        // Top Camera Viewfinder / Handle
+        ctx.fillStyle = '#334155';
+        ctx.fillRect(-9, -15, 14, 4);
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(-13, -12, 5, 4);
+
+        // Cinema Camera Head Housing (Metallic Brushed Gradient)
+        const camGrad = ctx.createLinearGradient(-13, -12, 10, 6);
+        camGrad.addColorStop(0, '#f1f5f9');
+        camGrad.addColorStop(0.55, '#cbd5e1');
+        camGrad.addColorStop(1, '#64748b');
+        ctx.fillStyle = camGrad;
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(-13, -12, 22, 16, 3.5);
+        ctx.fill();
+        ctx.stroke();
+
+        // Side Ventilation & Control Dial Details
+        ctx.fillStyle = '#475569';
+        ctx.fillRect(-10, -5, 8, 2);
+        ctx.fillRect(-10, -1, 8, 2);
+        ctx.fillStyle = '#0f172a';
+        ctx.beginPath();
+        ctx.arc(-2, -3, 2.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Multi-Element Telephoto Lens Barrel
+        ctx.fillStyle = '#1e293b';
+        ctx.strokeStyle = '#09090b';
+        ctx.lineWidth = 1.8;
+        ctx.beginPath();
+        ctx.roundRect(7, -9, 7, 12, 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Outer Lens Ring
+        ctx.fillStyle = '#0f172a';
+        ctx.beginPath();
+        ctx.arc(13.5, -3, 6.2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Glowing Cyan Glass Optic & Specular Glint
+        const lensGrad = ctx.createRadialGradient(12, -5, 1, 13.5, -3, 4.5);
+        lensGrad.addColorStop(0, '#e0f2fe');
+        lensGrad.addColorStop(0.45, '#38bdf8');
+        lensGrad.addColorStop(1, '#0369a1');
+        ctx.fillStyle = lensGrad;
+        ctx.beginPath();
+        ctx.arc(13.5, -3, 4.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(12, -4.8, 1.3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Blinking Red REC Tally Light
+        if (Math.floor(frameTick / 12) % 2 === 0) {
+            ctx.save();
+            ctx.shadowColor = '#ef4444';
+            ctx.shadowBlur = 6;
+            ctx.fillStyle = '#ef4444';
+            ctx.beginPath();
+            ctx.arc(-9.5, -9, 2.3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
+    function drawSkibidiToiletBoss(t, flushed) {
+        ctx.save();
+        const cx = t.x + t.w / 2;
+        const bottomY = t.y + t.h;
+
+        // Ground Contact Shadow
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+        ctx.beginPath();
+        ctx.ellipse(cx, bottomY, t.w * 0.45, 5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (flushed) {
+            const baseGrad = ctx.createLinearGradient(t.x, bottomY - 26, t.x + t.w, bottomY);
+            baseGrad.addColorStop(0, '#ffffff');
+            baseGrad.addColorStop(1, '#94a3b8');
+            ctx.fillStyle = baseGrad;
+            ctx.strokeStyle = '#1e293b';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.roundRect(t.x + 4, bottomY - 26, t.w - 8, 26, [6, 6, 2, 2]);
+            ctx.fill();
+            ctx.stroke();
+
+            // Swirling Flush Water Vortex
+            ctx.fillStyle = '#0ea5e9';
+            ctx.beginPath();
+            ctx.ellipse(cx, bottomY - 26, t.w * 0.46, 5.5, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#bae6fd';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.ellipse(cx, bottomY - 26, t.w * 0.25, 2.5, 0, 0, Math.PI * 1.5);
+            ctx.stroke();
+            ctx.restore();
+            return;
+        }
+
+        const headBob = Math.sin(frameTick * 0.25) * 3;
+        const headY = t.y + 18 + headBob;
+
+        // Neck Column Emerging from Bowl
+        ctx.fillStyle = '#d99b66';
+        ctx.fillRect(cx - 7, headY + 11, 14, 10);
+
+        // Sculpted Human Head with Skin Shading
+        const skinGrad = ctx.createRadialGradient(cx - 4, headY - 4, 3, cx, headY, 18);
+        skinGrad.addColorStop(0, '#ffedd5');
+        skinGrad.addColorStop(0.65, '#fdba74');
+        skinGrad.addColorStop(1, '#c27838');
+        ctx.fillStyle = skinGrad;
+        ctx.strokeStyle = '#1c1917';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.ellipse(cx, headY, 13.5, 16.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Ears
+        ctx.fillStyle = '#f59e0b';
+        ctx.beginPath();
+        ctx.ellipse(cx - 13.5, headY + 1, 2.5, 4.5, 0, 0, Math.PI * 2);
+        ctx.ellipse(cx + 13.5, headY + 1, 2.5, 4.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Cropped Dark Hair & Sideburns
+        ctx.fillStyle = '#1c1917';
+        ctx.beginPath();
+        ctx.arc(cx, headY - 4, 13.5, Math.PI * 1.05, Math.PI * 1.95);
+        ctx.lineTo(cx + 12, headY - 7);
+        ctx.quadraticCurveTo(cx, headY - 12, cx - 12, headY - 7);
+        ctx.closePath();
+        ctx.fill();
+
+        // Expressive Wide Eyes & Furrowed Brows
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.ellipse(cx - 5, headY - 3, 3.6, 4.2, 0, 0, Math.PI * 2);
+        ctx.ellipse(cx + 5, headY - 3, 3.6, 4.2, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#09090b';
+        ctx.beginPath();
+        ctx.arc(cx - 5.5, headY - 3, 1.8, 0, Math.PI * 2);
+        ctx.arc(cx + 4.5, headY - 3, 1.8, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = '#1c1917';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(cx - 9, headY - 8);
+        ctx.lineTo(cx - 2, headY - 6.5);
+        ctx.moveTo(cx + 9, headY - 8);
+        ctx.lineTo(cx + 2, headY - 6.5);
+        ctx.stroke();
+
+        // Nose Bridge
+        ctx.strokeStyle = '#b45309';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(cx, headY - 2);
+        ctx.lineTo(cx - 1.5, headY + 3);
+        ctx.lineTo(cx + 1, headY + 3.5);
+        ctx.stroke();
+
+        // Singing/Chanting Open Mouth with Teeth
+        const mouthH = 4 + Math.abs(Math.sin(frameTick * 0.32)) * 3.5;
+        ctx.fillStyle = '#7f1d1d';
+        ctx.beginPath();
+        ctx.ellipse(cx, headY + 8.5, 6.2, mouthH, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#1c1917';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(cx - 4, headY + 8.5 - mouthH + 0.5, 8, 2);
+
+        // Ceramic Toilet Tank (Back Right) with Lid & Chrome Flush Lever
+        const tankGrad = ctx.createLinearGradient(t.x + t.w - 16, t.y + 15, t.x + t.w, t.y + 46);
+        tankGrad.addColorStop(0, '#f8fafc');
+        tankGrad.addColorStop(1, '#cbd5e1');
+        ctx.fillStyle = tankGrad;
+        ctx.strokeStyle = '#1e293b';
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.roundRect(t.x + t.w - 15, t.y + 16, 14, 30, 3);
+        ctx.fill();
+        ctx.stroke();
+
+        // Tank Lid
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.roundRect(t.x + t.w - 16.5, t.y + 14, 17, 4, 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Chrome Flush Lever
+        ctx.fillStyle = '#38bdf8';
+        ctx.fillRect(t.x + t.w - 20, t.y + 21, 6, 3);
+
+        // Sculpted Porcelain Pedestal & Bowl with 3D Shading
+        const bowlGrad = ctx.createLinearGradient(t.x, t.y + 34, t.x + t.w, bottomY);
+        bowlGrad.addColorStop(0, '#ffffff');
+        bowlGrad.addColorStop(0.55, '#e2e8f0');
+        bowlGrad.addColorStop(1, '#94a3b8');
+        ctx.fillStyle = bowlGrad;
+        ctx.beginPath();
+        ctx.moveTo(t.x + 2, t.y + 34);
+        ctx.lineTo(t.x + t.w - 4, t.y + 34);
+        ctx.quadraticCurveTo(t.x + t.w - 5, t.y + 53, cx + 10, t.y + 56);
+        ctx.lineTo(cx + 13, bottomY - 3);
+        ctx.lineTo(cx + 15, bottomY);
+        ctx.lineTo(cx - 15, bottomY);
+        ctx.lineTo(cx - 13, bottomY - 3);
+        ctx.lineTo(cx - 10, t.y + 56);
+        ctx.quadraticCurveTo(t.x + 3, t.y + 53, t.x + 2, t.y + 34);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Contoured Toilet Seat Rim
+        ctx.fillStyle = '#f1f5f9';
+        ctx.beginPath();
+        ctx.ellipse(cx - 2, t.y + 34, t.w * 0.48, 5.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.restore();
+    }
+
+    // ==================== MINECRAFT THEME RENDERERS ====================
+    function drawMinecraftBackground() {
+        const dark = isDarkLevel();
+        ctx.fillStyle = dark ? '#090d16' : '#78a7ff';
+        ctx.fillRect(0, 0, V_WIDTH, V_HEIGHT);
+
+        ctx.fillStyle = dark ? '#e2e8f0' : '#fef08a';
+        ctx.fillRect(720, 42, 46, 46);
+
+        ctx.fillStyle = '#5c3c24';
+        ctx.fillRect(0, GROUND_Y, V_WIDTH, V_HEIGHT - GROUND_Y);
+        ctx.fillStyle = '#4ade80';
+        ctx.fillRect(0, GROUND_Y, V_WIDTH, 14);
+        ctx.strokeStyle = '#14532d';
+        ctx.lineWidth = 2;
+        for (let gx = 0; gx < V_WIDTH; gx += 32) {
+            ctx.strokeRect(gx, GROUND_Y, 32, 14);
+        }
+    }
+
+    function drawEnderPearlPlayer() {
+        const r = player.radius;
+
+        // Subtle Ender Void Aura
+        ctx.save();
+        ctx.shadowColor = '#a855f7';
+        ctx.shadowBlur = 10;
+
+        // Deep Translucent Ender Sphere Gradient
+        const pearlGrad = ctx.createRadialGradient(-r * 0.3, -r * 0.35, 2, 0, 0, r);
+        pearlGrad.addColorStop(0, '#99f6e4');
+        pearlGrad.addColorStop(0.35, '#14b8a6');
+        pearlGrad.addColorStop(0.75, '#0f766e');
+        pearlGrad.addColorStop(1, '#022c22');
+        ctx.fillStyle = pearlGrad;
+        ctx.beginPath();
+        ctx.arc(0, 0, r, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = '#581c87';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.restore();
+
+        // Faceted Ender Core & Slit Pupil
+        ctx.fillStyle = '#042f2e';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 6.5, 9.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#c084fc';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 3.2, 7.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#f3e8ff';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 1.3, 5.2, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Crystalline Glass Specular Highlights
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+        ctx.beginPath();
+        ctx.ellipse(-5.5, -6, 3.5, 1.8, -0.5, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    function drawCreeperBoss(t, defeated) {
+        ctx.save();
+        const cx = t.x + t.w / 2;
+        const bottomY = t.y + t.h;
+
+        // Ground Contact Shadow
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+        ctx.beginPath();
+        ctx.ellipse(cx, bottomY, t.w * 0.45, 5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (defeated) {
+            ctx.fillStyle = '#166534';
+            ctx.strokeStyle = '#052e16';
+            ctx.lineWidth = 2;
+            ctx.fillRect(t.x + 2, bottomY - 12, t.w - 4, 12);
+            ctx.strokeRect(t.x + 2, bottomY - 12, t.w - 4, 12);
+            ctx.fillStyle = '#4ade80';
+            ctx.fillRect(t.x + 8, bottomY - 10, 8, 4);
+            ctx.fillRect(t.x + 24, bottomY - 8, 10, 4);
+            ctx.restore();
+            return;
+        }
+
+        const flashWhite = t.alerted && Math.floor(frameTick / 5) % 2 === 0;
+        const swell = t.creeperFuse * 4.5;
+        const walkSwing = Math.sin(frameTick * 0.16) * 2.5;
+
+        const baseGreen = flashWhite ? '#ffffff' : '#16a34a';
+        const darkGreen = flashWhite ? '#e2e8f0' : '#15803d';
+        const lightGreen = flashWhite ? '#ffffff' : '#4ade80';
+
+        ctx.strokeStyle = '#052e16';
+        ctx.lineWidth = 2.2;
+
+        // Back Feet (3D Depth)
+        ctx.fillStyle = darkGreen;
+        ctx.fillRect(cx - 15, bottomY - 15 - walkSwing * 0.5, 12, 13);
+        ctx.strokeRect(cx - 15, bottomY - 15 - walkSwing * 0.5, 12, 13);
+        ctx.fillRect(cx + 3, bottomY - 15 + walkSwing * 0.5, 12, 13);
+        ctx.strokeRect(cx + 3, bottomY - 15 + walkSwing * 0.5, 12, 13);
+
+        // Torso Column with Pixel Camouflage Patches
+        const bodyX = cx - 12 - swell / 2;
+        const bodyY = t.y + 26;
+        const bodyW = 24 + swell;
+        const bodyH = 31;
+
+        ctx.fillStyle = baseGreen;
+        ctx.fillRect(bodyX, bodyY, bodyW, bodyH);
+
+        if (!flashWhite) {
+            ctx.fillStyle = lightGreen;
+            ctx.fillRect(bodyX + 3, bodyY + 4, 6, 6);
+            ctx.fillRect(bodyX + bodyW - 9, bodyY + 14, 6, 7);
+            ctx.fillStyle = darkGreen;
+            ctx.fillRect(bodyX + 10, bodyY + 8, 6, 8);
+            ctx.fillRect(bodyX + 3, bodyY + 20, 7, 6);
+        }
+        ctx.strokeRect(bodyX, bodyY, bodyW, bodyH);
+
+        // Front Feet with Toe Claws
+        ctx.fillStyle = baseGreen;
+        ctx.fillRect(cx - 17, bottomY - 13 + walkSwing * 0.5, 14, 13);
+        ctx.strokeRect(cx - 17, bottomY - 13 + walkSwing * 0.5, 14, 13);
+        ctx.fillRect(cx + 3, bottomY - 13 - walkSwing * 0.5, 14, 13);
+        ctx.strokeRect(cx + 3, bottomY - 13 - walkSwing * 0.5, 14, 13);
+
+        ctx.fillStyle = '#052e16';
+        ctx.fillRect(cx - 15, bottomY - 4 + walkSwing * 0.5, 3, 4);
+        ctx.fillRect(cx - 8, bottomY - 4 + walkSwing * 0.5, 3, 4);
+        ctx.fillRect(cx + 5, bottomY - 4 - walkSwing * 0.5, 3, 4);
+        ctx.fillRect(cx + 12, bottomY - 4 - walkSwing * 0.5, 3, 4);
+
+        // 3D Cubic Head with Top Bevel & Pixel Texture
+        const headX = cx - 16 - swell / 2;
+        const headY = t.y;
+        const headW = 32 + swell;
+        const headH = 28;
+
+        ctx.fillStyle = baseGreen;
+        ctx.fillRect(headX, headY, headW, headH);
+
+        if (!flashWhite) {
+            // Top Highlight Rim
+            ctx.fillStyle = lightGreen;
+            ctx.fillRect(headX + 1, headY + 1, headW - 2, 3);
+            ctx.fillRect(headX + 3, headY + 16, 5, 5);
+            ctx.fillStyle = darkGreen;
+            ctx.fillRect(headX + headW - 7, headY + 5, 5, 6);
+        }
+        ctx.strokeRect(headX, headY, headW, headH);
+
+        // Iconic Creeper Sad-Frown Face
+        ctx.fillStyle = flashWhite ? '#ef4444' : '#052e16';
+        ctx.fillRect(cx - 10, t.y + 6, 6, 6);
+        ctx.fillRect(cx + 4, t.y + 6, 6, 6);
+        ctx.fillRect(cx - 4, t.y + 12, 8, 5);
+        ctx.fillRect(cx - 8, t.y + 15, 16, 6);
+        ctx.fillRect(cx - 8, t.y + 20, 4, 5);
+        ctx.fillRect(cx + 4, t.y + 20, 4, 5);
+
+        ctx.restore();
+    }
+
+    // ==================== AMONG US THEME RENDERERS ====================
+    function drawAmongUsBackground() {
+        ctx.fillStyle = '#020617';
+        ctx.fillRect(0, 0, V_WIDTH, V_HEIGHT);
+
+        ctx.fillStyle = '#ffffff';
+        for (let i = 0; i < 42; i++) {
+            const sx = (i * 197) % V_WIDTH;
+            const sy = (i * 89) % (GROUND_Y - 20);
+            const r = (i % 3 === 0) ? 2 : 1.2;
+            ctx.fillRect(sx, sy, r, r);
+        }
+
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(0, GROUND_Y, V_WIDTH, V_HEIGHT - GROUND_Y);
+        ctx.fillStyle = '#64748b';
+        ctx.fillRect(0, GROUND_Y, V_WIDTH, 5);
+    }
+
+    function drawCrewmatePlayer() {
+        const r = player.radius;
+
+        // Oxygen Backpack (Contoured 3D Cylinder)
+        const packGrad = ctx.createLinearGradient(-r - 5, -8, -r + 4, 9);
+        packGrad.addColorStop(0, '#dc2626');
+        packGrad.addColorStop(1, '#7f1d1d');
+        ctx.fillStyle = packGrad;
+        ctx.strokeStyle = '#09090b';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(-r - 4.5, -7.5, 8, 16, 4);
+        ctx.fill();
+        ctx.stroke();
+
+        // Main Bean-Shaped Crewmate Torso & Stubby Legs
+        const bodyGrad = ctx.createRadialGradient(-3, -6, 3, 0, 0, r + 2);
+        bodyGrad.addColorStop(0, '#f87171');
+        bodyGrad.addColorStop(0.55, '#ef4444');
+        bodyGrad.addColorStop(1, '#991b1b');
+        ctx.fillStyle = bodyGrad;
+        ctx.beginPath();
+        ctx.arc(0, -2, r * 0.92, Math.PI, 0);
+        ctx.lineTo(r * 0.92, r * 0.82);
+        ctx.quadraticCurveTo(r * 0.92, r * 1.05, r * 0.5, r * 1.05);
+        ctx.quadraticCurveTo(r * 0.15, r * 1.05, r * 0.15, r * 0.72);
+        ctx.lineTo(-r * 0.15, r * 0.72);
+        ctx.quadraticCurveTo(-r * 0.15, r * 1.05, -r * 0.5, r * 1.05);
+        ctx.quadraticCurveTo(-r * 0.92, r * 1.05, -r * 0.92, r * 0.82);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Multi-Tone Curved Glass Visor
+        const visorGrad = ctx.createLinearGradient(0, -9, 12, 3);
+        visorGrad.addColorStop(0, '#bae6fd');
+        visorGrad.addColorStop(0.45, '#38bdf8');
+        visorGrad.addColorStop(1, '#0284c7');
+        ctx.fillStyle = visorGrad;
+        ctx.beginPath();
+        ctx.roundRect(-1, -8.5, 16.5, 10.5, 5.5);
+        ctx.fill();
+        ctx.stroke();
+
+        // Crisp White Visor Specular Reflection
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.ellipse(6.5, -5.5, 5.5, 2, -0.1, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    function drawImpostorBoss(t, ejected) {
+        ctx.save();
+        const cx = t.x + t.w / 2;
+        const bottomY = t.y + t.h;
+
+        // Ground Contact Shadow
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+        ctx.beginPath();
+        ctx.ellipse(cx, bottomY, t.w * 0.48, 5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (ejected) {
+            // Classic Half-Body with Protruding Cartoony Bone
+            const cutGrad = ctx.createLinearGradient(t.x + 6, bottomY - 24, t.x + t.w - 6, bottomY);
+            cutGrad.addColorStop(0, '#9333ea');
+            cutGrad.addColorStop(1, '#581c87');
+            ctx.fillStyle = cutGrad;
+            ctx.strokeStyle = '#09090b';
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            ctx.roundRect(t.x + 6, bottomY - 24, t.w - 12, 24, [2, 2, 6, 6]);
+            ctx.fill();
+            ctx.stroke();
+
+            // Flesh Cross-Section
+            ctx.fillStyle = '#dc2626';
+            ctx.beginPath();
+            ctx.ellipse(cx, bottomY - 24, (t.w - 14) / 2, 4.5, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            // White Bone Shaft & Knobs
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillRect(cx - 3.5, bottomY - 37, 7, 14);
+            ctx.strokeRect(cx - 3.5, bottomY - 37, 7, 14);
+            ctx.beginPath();
+            ctx.arc(cx - 4.5, bottomY - 37, 4.5, 0, Math.PI * 2);
+            ctx.arc(cx + 4.5, bottomY - 37, 4.5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore();
+            return;
+        }
+
+        const waddle = Math.sin(frameTick * 0.16) * 2;
+
+        // Purple Oxygen Backpack (Right Side, Facing Left)
+        const packGrad = ctx.createLinearGradient(t.x + t.w - 6, t.y + 18, t.x + t.w + 6, t.y + 46);
+        packGrad.addColorStop(0, '#7e22ce');
+        packGrad.addColorStop(1, '#3b0764');
+        ctx.fillStyle = packGrad;
+        ctx.strokeStyle = '#09090b';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.roundRect(t.x + t.w - 6, t.y + 18, 10, 28, 5);
+        ctx.fill();
+        ctx.stroke();
+
+        // Sculpted Impostor Bean Body with Shading
+        const bodyGrad = ctx.createRadialGradient(cx - 4, t.y + 16, 4, cx, t.y + 34, t.w * 0.85);
+        bodyGrad.addColorStop(0, '#a855f7');
+        bodyGrad.addColorStop(0.55, '#7e22ce');
+        bodyGrad.addColorStop(1, '#4c1d95');
+        ctx.fillStyle = bodyGrad;
+        ctx.beginPath();
+        ctx.arc(cx, t.y + 21, t.w * 0.45, Math.PI, 0);
+        ctx.lineTo(t.x + t.w - 2.5, bottomY - 4 + waddle);
+        ctx.quadraticCurveTo(t.x + t.w - 2.5, bottomY, cx + 8, bottomY);
+        ctx.quadraticCurveTo(cx + 3, bottomY, cx + 3, bottomY - 14);
+        ctx.lineTo(cx - 3, bottomY - 14);
+        ctx.quadraticCurveTo(cx - 3, bottomY, cx - 8, bottomY);
+        ctx.quadraticCurveTo(t.x + 2.5, bottomY, t.x + 2.5, bottomY - 4 - waddle);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Visor (Shifts from Cyan to Menacing Red with Glint when Alerted)
+        const visorGrad = ctx.createLinearGradient(t.x + 3, t.y + 11, t.x + 28, t.y + 25);
+        if (t.alerted) {
+            visorGrad.addColorStop(0, '#fca5a5');
+            visorGrad.addColorStop(0.5, '#ef4444');
+            visorGrad.addColorStop(1, '#991b1b');
+        } else {
+            visorGrad.addColorStop(0, '#bae6fd');
+            visorGrad.addColorStop(0.5, '#38bdf8');
+            visorGrad.addColorStop(1, '#0369a1');
+        }
+        ctx.fillStyle = visorGrad;
+        ctx.beginPath();
+        ctx.roundRect(t.x + 3, t.y + 11, 25, 13, 6.5);
+        ctx.fill();
+        ctx.stroke();
+
+        // Visor Specular Reflection
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.ellipse(t.x + 12, t.y + 14.5, 7, 2.3, -0.1, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Menacing Impostor Red Starburst Glint when Alerted
+        if (t.alerted) {
+            ctx.save();
+            ctx.shadowColor = '#ef4444';
+            ctx.shadowBlur = 10;
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.moveTo(t.x + 14, t.y + 12);
+            ctx.lineTo(t.x + 15.5, t.y + 16.5);
+            ctx.lineTo(t.x + 20, t.y + 18);
+            ctx.lineTo(t.x + 15.5, t.y + 19.5);
+            ctx.lineTo(t.x + 14, t.y + 24);
+            ctx.lineTo(t.x + 12.5, t.y + 19.5);
+            ctx.lineTo(t.x + 8, t.y + 18);
+            ctx.lineTo(t.x + 12.5, t.y + 16.5);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
+        ctx.restore();
+    }
+
+    // ==================== MARIO THEME RENDERERS ====================
+    function drawMarioBackground() {
+        const dark = isDarkLevel();
+        if (dark) {
+            ctx.fillStyle = '#040612';
+            ctx.fillRect(0, 0, V_WIDTH, V_HEIGHT);
+            ctx.fillStyle = 'rgba(30, 58, 138, 0.14)';
+            for (let y = 30; y < GROUND_Y; y += 64) {
+                for (let x = (y % 128 === 0 ? 20 : 68); x < V_WIDTH; x += 96) {
+                    ctx.fillRect(x, y, 42, 22);
+                }
+            }
+            ctx.fillStyle = '#1e3a8a';
+            ctx.fillRect(0, 0, V_WIDTH, 16);
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 2.5;
+            ctx.strokeRect(-2, 0, V_WIDTH + 4, 16);
+            return;
+        }
+
+        ctx.fillStyle = '#5c94fc';
+        ctx.fillRect(0, 0, V_WIDTH, V_HEIGHT);
+
+        const hills = [
+            { x: 90, y: GROUND_Y, r: 85 },
+            { x: 520, y: GROUND_Y, r: 110 },
+            { x: 830, y: GROUND_Y, r: 75 }
+        ];
+        hills.forEach(h => {
+            ctx.fillStyle = '#00a800';
+            ctx.beginPath();
+            ctx.arc(h.x, h.y, h.r, Math.PI, 0);
+            ctx.fill();
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        });
+    }
+
+    function drawMarioGround() {
+        const dark = isDarkLevel();
+        ctx.fillStyle = dark ? '#1e3a8a' : '#c84c0c';
+        ctx.fillRect(0, GROUND_Y, V_WIDTH, V_HEIGHT - GROUND_Y);
+
+        ctx.fillStyle = dark ? '#3b82f6' : '#43b047';
+        ctx.fillRect(0, GROUND_Y, V_WIDTH, 12);
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(-2, GROUND_Y, V_WIDTH + 4, 12);
+    }
+
+    function drawWarpPipe(x, topY) {
+        const pipeW = 42;
+        const pipeH = GROUND_Y - topY;
+        const leftX = x - pipeW / 2;
+
+        ctx.fillStyle = '#2e9e32';
+        ctx.fillRect(leftX + 3, topY + 16, pipeW - 6, pipeH - 16);
+        ctx.fillStyle = '#80d010';
+        ctx.fillRect(leftX + 7, topY + 16, 8, pipeH - 16);
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(leftX + 3, topY + 16, pipeW - 6, pipeH - 16);
+
+        ctx.fillStyle = '#43b047';
+        ctx.fillRect(leftX - 4, topY, pipeW + 8, 17);
+        ctx.strokeRect(leftX - 4, topY, pipeW + 8, 17);
+    }
+
+    function drawRealisticGoomba(t, squashed) {
+        ctx.save();
+        const cx = t.x + t.w / 2;
+        const bottomY = t.y + t.h;
+        const dark = isDarkLevel();
+
+        // Ground Shadow
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+        ctx.beginPath();
+        ctx.ellipse(cx, bottomY, t.w * 0.5, 5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (squashed) {
+            const flatGrad = ctx.createLinearGradient(t.x - 6, bottomY - 12, t.x + t.w + 6, bottomY);
+            flatGrad.addColorStop(0, dark ? '#0891b2' : '#9a3412');
+            flatGrad.addColorStop(1, dark ? '#164e63' : '#451a03');
+            ctx.fillStyle = flatGrad;
+            ctx.beginPath();
+            ctx.ellipse(cx, bottomY - 6, t.w * 0.72, 6.5, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+
+            // Dizzy Squashed Eyes
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(cx - 10, bottomY - 8); ctx.lineTo(cx - 5, bottomY - 4);
+            ctx.moveTo(cx - 5, bottomY - 8); ctx.lineTo(cx - 10, bottomY - 4);
+            ctx.moveTo(cx + 5, bottomY - 8); ctx.lineTo(cx + 10, bottomY - 4);
+            ctx.moveTo(cx + 10, bottomY - 8); ctx.lineTo(cx + 5, bottomY - 4);
+            ctx.stroke();
+            ctx.restore();
+            return;
+        }
+
+        const waddle = Math.sin(frameTick * 0.18) * 3.5;
+
+        // Rounded Brown Leather Feet with Sole Highlights
+        const bootGrad = ctx.createRadialGradient(cx, bottomY - 8, 2, cx, bottomY - 6, 20);
+        bootGrad.addColorStop(0, '#78350f');
+        bootGrad.addColorStop(1, '#291507');
+        ctx.fillStyle = bootGrad;
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 2;
+
+        ctx.beginPath();
+        ctx.ellipse(cx - 12, bottomY - 7 + (waddle > 0 ? -2.5 : 0), 11, 7.5, -0.2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.ellipse(cx + 12, bottomY - 7 + (waddle < 0 ? -2.5 : 0), 11, 7.5, 0.2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Plump Cream Mushroom Stalk Body
+        const stemGrad = ctx.createRadialGradient(cx - 4, t.y + t.h * 0.65, 3, cx, t.y + t.h * 0.7, 20);
+        stemGrad.addColorStop(0, '#fef3c7');
+        stemGrad.addColorStop(0.65, '#f3c68f');
+        stemGrad.addColorStop(1, '#c28b4e');
+        ctx.fillStyle = stemGrad;
+        ctx.beginPath();
+        ctx.roundRect(cx - 14, t.y + t.h * 0.46, 28, t.h * 0.44, 11);
+        ctx.fill();
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 2.2;
+        ctx.stroke();
+
+        // Sculpted Chestnut Mushroom Cap
+        const capGrad = ctx.createRadialGradient(cx - 6, t.y + 10, 4, cx, t.y + 24, t.w * 0.7);
+        if (dark) {
+            capGrad.addColorStop(0, '#22d3ee');
+            capGrad.addColorStop(0.55, '#0e7490');
+            capGrad.addColorStop(1, '#164e63');
+        } else {
+            capGrad.addColorStop(0, '#d97706');
+            capGrad.addColorStop(0.55, '#9a3412');
+            capGrad.addColorStop(1, '#451a03');
+        }
+        ctx.fillStyle = capGrad;
+        ctx.beginPath();
+        ctx.moveTo(t.x - 5, t.y + t.h * 0.56);
+        ctx.bezierCurveTo(t.x - 8, t.y + 16, cx - 17, t.y + 1, cx, t.y + 1);
+        ctx.bezierCurveTo(cx + 17, t.y + 1, t.x + t.w + 8, t.y + 16, t.x + t.w + 5, t.y + t.h * 0.56);
+        ctx.quadraticCurveTo(cx, t.y + t.h * 0.62, t.x - 5, t.y + t.h * 0.56);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Cap Specular Highlight
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+        ctx.beginPath();
+        ctx.ellipse(cx - 8, t.y + 10, 6, 3, -0.4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Angry Scowling Eyes
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.ellipse(cx - 7.5, t.y + t.h * 0.37, 4.8, 7.5, 0, 0, Math.PI * 2);
+        ctx.ellipse(cx + 7.5, t.y + t.h * 0.37, 4.8, 7.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.fillStyle = '#000000';
+        ctx.beginPath();
+        ctx.arc(cx - 6.2, t.y + t.h * 0.38, 2.3, 0, Math.PI * 2);
+        ctx.arc(cx + 6.2, t.y + t.h * 0.38, 2.3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Thick Connected Unibrow Scowl
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 3.2;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(cx - 14, t.y + t.h * 0.24);
+        ctx.lineTo(cx - 2, t.y + t.h * 0.32);
+        ctx.lineTo(cx + 2, t.y + t.h * 0.32);
+        ctx.lineTo(cx + 14, t.y + t.h * 0.24);
+        ctx.stroke();
+
+        // Frowning Mouth with Two Pointed Fangs
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(cx - 10, t.y + t.h * 0.52);
+        ctx.quadraticCurveTo(cx, t.y + t.h * 0.47, cx + 10, t.y + t.h * 0.52);
+        ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.moveTo(cx - 9, t.y + t.h * 0.51);
+        ctx.lineTo(cx - 6.5, t.y + t.h * 0.44);
+        ctx.lineTo(cx - 4.5, t.y + t.h * 0.50);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(cx + 9, t.y + t.h * 0.51);
+        ctx.lineTo(cx + 6.5, t.y + t.h * 0.44);
+        ctx.lineTo(cx + 4.5, t.y + t.h * 0.50);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.restore();
+    }
+
+    function drawMarioPlayer() {
+        const r = player.radius;
+
+        // Shaded Skin Head Base
+        const faceGrad = ctx.createRadialGradient(-2, -1, 2, 0, 1, r);
+        faceGrad.addColorStop(0, '#ffe4c4');
+        faceGrad.addColorStop(0.7, '#ffcca5');
+        faceGrad.addColorStop(1, '#d99b66');
+        ctx.fillStyle = faceGrad;
+        ctx.beginPath();
+        ctx.arc(0, 1, r - 0.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Dark Brown Back Hair & Sideburn
+        ctx.fillStyle = '#451a03';
+        ctx.beginPath();
+        ctx.arc(-2, 1, r - 0.5, Math.PI * 0.65, Math.PI * 1.15);
+        ctx.fill();
+        ctx.fillRect(-5, -1, 3.5, 6);
+
+        // Ear
+        ctx.fillStyle = '#f5b882';
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(-6, 2.5, 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Iconic Red Mario Cap & Brim
+        const capGrad = ctx.createLinearGradient(0, -r, 0, 0);
+        capGrad.addColorStop(0, '#ff4d4d');
+        capGrad.addColorStop(1, '#b91c1c');
+        ctx.fillStyle = capGrad;
+        ctx.beginPath();
+        ctx.arc(0, -1.5, r, Math.PI * 1.05, Math.PI * 1.98);
+        ctx.closePath();
+        ctx.fill();
+
+        // Cap Emblem Circle
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(4, -7.5, 3.6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#dc2626';
+        ctx.fillRect(2.7, -8.8, 2.6, 2.6);
+
+        // Cap Visor/Brim
+        ctx.fillStyle = '#dc2626';
+        ctx.beginPath();
+        ctx.roundRect(1, -5, r + 5.5, 4.5, 2.5);
+        ctx.fill();
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 1.8;
+        ctx.stroke();
+
+        // Blue Iris & Expressive Eye
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.ellipse(5.5, 0.5, 2.5, 3.6, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#1d4ed8';
+        ctx.beginPath();
+        ctx.ellipse(6.2, 0.5, 1.5, 2.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Sculpted Bulbous Nose
+        ctx.fillStyle = '#f5b882';
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.ellipse(r - 1, 2.5, 4.8, 3.8, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Iconic Scalloped Mustache
+        ctx.fillStyle = '#291507';
+        ctx.beginPath();
+        ctx.arc(5, 7, 2.6, 0, Math.PI);
+        ctx.arc(9.5, 7, 2.6, 0, Math.PI);
+        ctx.arc(13.5, 6.5, 2.2, 0, Math.PI);
+        ctx.lineTo(3, 5.5);
+        ctx.closePath();
+        ctx.fill();
+
+        // Outer Head Contour
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(0, 0.5, r - 0.5, 0, Math.PI * 2);
+        ctx.stroke();
+    }
+
+    // ==================== PAC-MAN THEME RENDERERS ====================
+    function drawPacmanBackground() {
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, V_WIDTH, V_HEIGHT);
+        ctx.strokeStyle = '#2121ff';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(14, 14, V_WIDTH - 28, GROUND_Y - 24);
+
+        ctx.fillStyle = '#05051a';
+        ctx.fillRect(0, GROUND_Y, V_WIDTH, V_HEIGHT - GROUND_Y);
+        ctx.beginPath();
+        ctx.moveTo(0, GROUND_Y);
+        ctx.lineTo(V_WIDTH, GROUND_Y);
+        ctx.stroke();
+    }
+
+    function drawPacmanPlayer() {
+        let angle = 0;
+        if (gameState === STATE_AIRBORNE && (Math.abs(player.vx) > 0.2 || Math.abs(player.vy) > 0.2)) {
+            angle = Math.atan2(player.vy, player.vx);
+        } else if (gameState === STATE_DRAGGING) {
+            angle = Math.atan2(anchor.y - player.y, anchor.x - player.x);
+        }
+        ctx.save();
+        ctx.rotate(-player.rotation + angle);
+        const chomp = Math.abs(Math.sin(frameTick * 0.35)) * 0.52 + 0.08;
+        const r = player.radius + 1;
+
+        // 3D Spherical Pac-Man Gradient
+        const pacGrad = ctx.createRadialGradient(-r * 0.25, -r * 0.3, 2, 0, 0, r);
+        pacGrad.addColorStop(0, '#fef9c3');
+        pacGrad.addColorStop(0.5, '#ffff00');
+        pacGrad.addColorStop(1, '#ca8a04');
+
+        ctx.fillStyle = pacGrad;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.arc(0, 0, r, chomp, Math.PI * 2 - chomp);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.strokeStyle = '#854d0e';
+        ctx.lineWidth = 1.6;
+        ctx.stroke();
+
+        // Dark Inner Mouth Cavity
+        ctx.fillStyle = '#451a03';
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(Math.cos(chomp) * (r * 0.65), Math.sin(chomp) * (r * 0.65));
+        ctx.lineTo(Math.cos(-chomp) * (r * 0.65), Math.sin(-chomp) * (r * 0.65));
+        ctx.closePath();
+        ctx.fill();
+
+        // Classic Arcade Pie-Cut Eye
+        ctx.fillStyle = '#09090b';
+        ctx.beginPath();
+        ctx.arc(1, -r * 0.45, 2.4, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+    function drawPinkyGhost(t, defeated) {
+        ctx.save();
+        const cx = t.x + t.w / 2;
+        const bottomY = t.y + t.h;
+
+        // Calculate Eye Tracking Direction toward Player
+        const lookAngle = Math.atan2(player.y - (t.y + 24), player.x - cx);
+        const pupilX = Math.cos(lookAngle) * 2.3;
+        const pupilY = Math.sin(lookAngle) * 2.3;
+
+        if (defeated) {
+            // Retreating Ghost Eyes Only
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.ellipse(cx - 8, t.y + 30, 6.5, 8.5, 0, 0, Math.PI * 2);
+            ctx.ellipse(cx + 8, t.y + 30, 6.5, 8.5, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#2121ff';
+            ctx.beginPath();
+            ctx.arc(cx - 8 + pupilX, t.y + 30 + pupilY, 3.2, 0, Math.PI * 2);
+            ctx.arc(cx + 8 + pupilX, t.y + 30 + pupilY, 3.2, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+            return;
+        }
+
+        const r = t.w / 2;
+        const headCenterY = t.y + r + 4;
+        const waveShift = Math.sin(frameTick * 0.25) * 2;
+
+        // Translucent Shaded Ghost Body with Animated 3-Tentacle Wavy Skirt
+        const ghostGrad = ctx.createRadialGradient(cx - 6, headCenterY - 6, 4, cx, t.y + t.h * 0.5, t.h * 0.75);
+        if (t.alerted) {
+            ghostGrad.addColorStop(0, '#fce7f3');
+            ghostGrad.addColorStop(0.45, '#f472b6');
+            ghostGrad.addColorStop(1, '#be185d');
+        } else {
+            ghostGrad.addColorStop(0, '#fdf2f8');
+            ghostGrad.addColorStop(0.45, '#ffb8ff');
+            ghostGrad.addColorStop(1, '#db2777');
+        }
+
+        ctx.fillStyle = ghostGrad;
+        ctx.beginPath();
+        ctx.arc(cx, headCenterY, r, Math.PI, 0);
+        ctx.lineTo(t.x + t.w, bottomY - 5);
+
+        // Wavy Bottom Hem
+        const segW = t.w / 3;
+        for (let i = 2; i >= 0; i--) {
+            const xRight = t.x + (i + 1) * segW;
+            const xLeft = t.x + i * segW;
+            const xMid = (xRight + xLeft) / 2;
+            const tipY = bottomY + ((i % 2 === 0) ? waveShift : -waveShift);
+            ctx.quadraticCurveTo(xMid, tipY + 4, xLeft, bottomY - 5);
+        }
+
+        ctx.closePath();
+        ctx.fill();
+
+        // Glossy Dome Highlight
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
+        ctx.beginPath();
+        ctx.ellipse(cx - 8, headCenterY - 8, 5, 3, -0.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Large Expressive Eyes with Directional Pupils
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.ellipse(cx - 8, headCenterY - 1, 6.2, 8.2, 0, 0, Math.PI * 2);
+        ctx.ellipse(cx + 8, headCenterY - 1, 6.2, 8.2, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#1d4ed8';
+        ctx.beginPath();
+        ctx.arc(cx - 8 + pupilX, headCenterY - 1 + pupilY, 3.2, 0, Math.PI * 2);
+        ctx.arc(cx + 8 + pupilX, headCenterY - 1 + pupilY, 3.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+    // ==================== BACKROOMS THEME RENDERERS ====================
+    function drawBackroomsBackground() {
+        const dark = isDarkLevel();
+        ctx.fillStyle = dark ? '#26210c' : '#c9b96b';
+        ctx.fillRect(0, 0, V_WIDTH, V_HEIGHT);
+
+        ctx.fillStyle = dark ? 'rgba(0, 0, 0, 0.28)' : 'rgba(138, 120, 48, 0.24)';
+        for (let x = 20; x < V_WIDTH; x += 48) {
+            ctx.fillRect(x, 0, 6, GROUND_Y);
+        }
+
+        ctx.fillStyle = dark ? '#1c1709' : '#7c6936';
+        ctx.fillRect(0, GROUND_Y, V_WIDTH, V_HEIGHT - GROUND_Y);
+    }
+
+    function drawHazmatBall() {
+        const r = player.radius;
+
+        // Shaded Yellow Hazmat Hood & Suit Collar
+        const suitGrad = ctx.createRadialGradient(-4, -5, 2, 0, 0, r);
+        suitGrad.addColorStop(0, '#fef08a');
+        suitGrad.addColorStop(0.55, '#eab308');
+        suitGrad.addColorStop(1, '#a16207');
+        ctx.fillStyle = suitGrad;
+        ctx.beginPath();
+        ctx.arc(0, 0, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#18181b';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Hood Seam & Neck Seal Ring
+        ctx.strokeStyle = '#854d0e';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(-1, 0, r - 3.5, Math.PI * 0.65, Math.PI * 1.35);
+        ctx.stroke();
+
+        // Side Respirator Filter Pod
+        ctx.fillStyle = '#3f3f46';
+        ctx.strokeStyle = '#09090b';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(-5, 6, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Dark Tinted Hazmat Face Shield Visor
+        const visorGrad = ctx.createLinearGradient(-3, -8, 12, 4);
+        visorGrad.addColorStop(0, '#3f3f46');
+        visorGrad.addColorStop(0.5, '#18181b');
+        visorGrad.addColorStop(1, '#09090b');
+        ctx.fillStyle = visorGrad;
+        ctx.beginPath();
+        ctx.roundRect(-3, -8.5, 16.5, 12, 5.5);
+        ctx.fill();
+        ctx.strokeStyle = '#ca8a04';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Amber/White Fluorescent Ceiling Reflection on Visor
+        ctx.fillStyle = 'rgba(254, 240, 138, 0.55)';
+        ctx.beginPath();
+        ctx.ellipse(5, -5.5, 5.5, 1.8, -0.1, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    function drawBacteriaBoss(t, defeated) {
+        ctx.save();
+        const cx = t.x + t.w / 2;
+        const bottomY = t.y + t.h;
+
+        // Guard Zone Line
+        ctx.strokeStyle = 'rgba(239, 68, 68, 0.35)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(t.baseX - 38, bottomY);
+        ctx.lineTo(t.baseX + t.w + 38, bottomY);
+        ctx.stroke();
+
+        if (defeated) {
+            ctx.strokeStyle = '#09090b';
+            ctx.lineCap = 'round';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(cx - 22, bottomY - 4);
+            ctx.lineTo(cx + 22, bottomY - 4);
+            ctx.moveTo(cx - 12, bottomY - 9);
+            ctx.lineTo(cx + 8, bottomY - 2);
+            ctx.stroke();
+            ctx.restore();
+            return;
+        }
+
+        const twitchX = Math.sin(frameTick * 0.85) * (t.alerted ? 2.8 : 1.2);
+        const twitchY = Math.cos(frameTick * 0.65) * (t.alerted ? 1.8 : 0.6);
+
+        ctx.strokeStyle = '#09090b';
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        // Multi-Jointed Gangly Legs with Knee Joints
+        ctx.lineWidth = 4.2;
+        ctx.beginPath();
+        // Left Leg
+        ctx.moveTo(cx - 5, t.y + 40);
+        ctx.lineTo(cx - 14 - twitchX * 0.5, t.y + 54);
+        ctx.lineTo(cx - 11 + twitchX, bottomY);
+        // Right Leg
+        ctx.moveTo(cx + 5, t.y + 40);
+        ctx.lineTo(cx + 14 + twitchX * 0.5, t.y + 54);
+        ctx.lineTo(cx + 11 - twitchX, bottomY);
+        ctx.stroke();
+
+        // Twisted Skeletal Torso & Rib-Like Tendrils
+        ctx.lineWidth = 4.5;
+        ctx.beginPath();
+        ctx.moveTo(cx, t.y + 14);
+        ctx.quadraticCurveTo(cx + twitchX * 1.4, t.y + 28, cx, t.y + 42);
+        ctx.stroke();
+
+        ctx.lineWidth = 2.4;
+        ctx.beginPath();
+        ctx.moveTo(cx - 7, t.y + 24);
+        ctx.lineTo(cx + 7, t.y + 26);
+        ctx.moveTo(cx - 6, t.y + 31);
+        ctx.lineTo(cx + 6, t.y + 33);
+        ctx.stroke();
+
+        // Long Double-Jointed Arms with Clawed Fingers
+        ctx.lineWidth = 3.5;
+        ctx.beginPath();
+        // Left Arm
+        ctx.moveTo(cx - 5, t.y + 21);
+        ctx.lineTo(t.x - 6 + twitchX, t.y + 34 + twitchY);
+        ctx.lineTo(t.x - 10 - twitchX, t.y + 52);
+        // Right Arm
+        ctx.moveTo(cx + 5, t.y + 21);
+        ctx.lineTo(t.x + t.w + 6 - twitchX, t.y + 34 - twitchY);
+        ctx.lineTo(t.x + t.w + 10 + twitchX, t.y + 52);
+        ctx.stroke();
+
+        // Clawed Tendril Fingers
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(t.x - 10 - twitchX, t.y + 52);
+        ctx.lineTo(t.x - 14 - twitchX, t.y + 58);
+        ctx.moveTo(t.x - 10 - twitchX, t.y + 52);
+        ctx.lineTo(t.x - 7 - twitchX, t.y + 59);
+        ctx.moveTo(t.x + t.w + 10 + twitchX, t.y + 52);
+        ctx.lineTo(t.x + t.w + 14 + twitchX, t.y + 58);
+        ctx.moveTo(t.x + t.w + 10 + twitchX, t.y + 52);
+        ctx.lineTo(t.x + t.w + 7 + twitchX, t.y + 59);
+        ctx.stroke();
+
+        // Contorted Wire-Frame Oval Head & Crown Loops
+        const headX = cx + twitchX * 0.6;
+        const headY = t.y + 11;
+        ctx.lineWidth = 3.8;
+        ctx.beginPath();
+        ctx.ellipse(headX, headY, 11.5, 9.5, 0.22, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.arc(headX - 4, headY - 7, 5, Math.PI, 0);
+        ctx.arc(headX + 5, headY - 6, 4.5, Math.PI, 0);
+        ctx.stroke();
+
+        // Glowing Pinpoint Eyes
+        ctx.save();
+        ctx.shadowColor = t.alerted ? '#ef4444' : '#fef08a';
+        ctx.shadowBlur = 8;
+        ctx.fillStyle = t.alerted ? '#ef4444' : '#fef08a';
+        ctx.beginPath();
+        ctx.arc(headX - 4, headY - 1, 2, 0, Math.PI * 2);
+        ctx.arc(headX + 4, headY - 1, 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        ctx.restore();
+    }
+
+    // ==================== REGULAR CYBER-KING BOSS ====================
+    function drawRegularBoss(t, squashed) {
+        ctx.save();
+        const cx = t.x + t.w / 2;
+        const bottomY = t.y + t.h;
+
+        // Ground Contact Shadow
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
+        ctx.beginPath();
+        ctx.ellipse(cx, bottomY, t.w * 0.52, 5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (squashed) {
+            ctx.translate(cx, bottomY);
+            ctx.scale(1.32, 0.24);
+            ctx.translate(-cx, -bottomY);
+        }
+
+        // Heavy Armored Treads / Base Boots
+        ctx.fillStyle = '#18181b';
+        ctx.strokeStyle = '#52525b';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(t.x - 2, bottomY - 11, t.w + 4, 11, 4);
+        ctx.fill();
+        ctx.stroke();
+
+        // Sculpted Crimson Mech Chassis with Metallic Gradient
+        const armorGrad = ctx.createLinearGradient(t.x, t.y, t.x + t.w, t.y + t.h);
+        armorGrad.addColorStop(0, '#dc2626');
+        armorGrad.addColorStop(0.5, '#991b1b');
+        armorGrad.addColorStop(1, '#450a0a');
+        ctx.fillStyle = armorGrad;
+        ctx.strokeStyle = '#f87171';
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.roundRect(t.x, t.y + 4, t.w, t.h - 13, 8);
+        ctx.fill();
+        ctx.stroke();
+
+        // Armored Shoulder Pauldrons
+        ctx.fillStyle = '#7f1d1d';
+        ctx.strokeStyle = '#ef4444';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(t.x - 5, t.y + 10, 9, 22, 4);
+        ctx.roundRect(t.x + t.w - 4, t.y + 10, 9, 22, 4);
+        ctx.fill();
+        ctx.stroke();
+
+        // Chest Reactor Core
+        ctx.save();
+        ctx.shadowColor = '#facc15';
+        ctx.shadowBlur = 8;
+        ctx.fillStyle = '#fef08a';
+        ctx.beginPath();
+        ctx.arc(cx, t.y + 44, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+        ctx.strokeStyle = '#18181b';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Floating Golden Cyber Crown
+        const crownFloat = Math.sin(frameTick * 0.1) * 2;
+        const crownGrad = ctx.createLinearGradient(t.x + 6, t.y - 16, t.x + t.w - 6, t.y);
+        crownGrad.addColorStop(0, '#fef08a');
+        crownGrad.addColorStop(0.5, '#facc15');
+        crownGrad.addColorStop(1, '#ca8a04');
+        ctx.fillStyle = crownGrad;
+        ctx.strokeStyle = '#713f12';
+        ctx.lineWidth = 1.8;
+        ctx.beginPath();
+        ctx.moveTo(t.x + 7, t.y + 1 + crownFloat);
+        ctx.lineTo(t.x + 11, t.y - 11 + crownFloat);
+        ctx.lineTo(cx - 5, t.y - 4 + crownFloat);
+        ctx.lineTo(cx, t.y - 15 + crownFloat);
+        ctx.lineTo(cx + 5, t.y - 4 + crownFloat);
+        ctx.lineTo(t.x + t.w - 11, t.y - 11 + crownFloat);
+        ctx.lineTo(t.x + t.w - 7, t.y + 1 + crownFloat);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Recessed Dark Visor Slit & Glowing Scowling Optics
+        ctx.fillStyle = '#09090b';
+        ctx.beginPath();
+        ctx.roundRect(t.x + 5, t.y + 15, t.w - 10, 15, 4);
+        ctx.fill();
+
+        ctx.save();
+        ctx.shadowColor = '#facc15';
+        ctx.shadowBlur = 8;
+        ctx.fillStyle = '#facc15';
+        ctx.beginPath();
+        ctx.moveTo(t.x + 9, t.y + 19);
+        ctx.lineTo(t.x + 19, t.y + 22);
+        ctx.lineTo(t.x + 19, t.y + 25);
+        ctx.lineTo(t.x + 9, t.y + 24);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(t.x + t.w - 9, t.y + 19);
+        ctx.lineTo(t.x + t.w - 19, t.y + 22);
+        ctx.lineTo(t.x + t.w - 19, t.y + 25);
+        ctx.lineTo(t.x + t.w - 9, t.y + 24);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+
+        ctx.restore();
+    }
+
+    function drawPlayerAvatarByTheme() {
+        if (currentTheme === 'skibidi') {
+            drawCameramanPlayer();
+        } else if (currentTheme === 'minecraft') {
+            drawEnderPearlPlayer();
+        } else if (currentTheme === 'amongus') {
+            drawCrewmatePlayer();
+        } else if (currentTheme === 'mario') {
+            drawMarioPlayer();
+        } else if (currentTheme === 'pacman') {
+            drawPacmanPlayer();
+        } else if (currentTheme === 'backrooms') {
+            drawHazmatBall();
+        } else {
+            // Realistic Sculpted Ninja-Bird Hero
+            const r = player.radius;
+
+            // Fluttering Tail Feathers (Back)
+            ctx.fillStyle = '#9f1239';
+            ctx.strokeStyle = '#09090b';
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.moveTo(-r + 2, -2);
+            ctx.lineTo(-r - 8, -7);
+            ctx.lineTo(-r - 5, 0);
+            ctx.lineTo(-r - 9, 5);
+            ctx.lineTo(-r + 2, 4);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Flowing Crimson Ninja Headband Tails
+            const ribbonWave = Math.sin(frameTick * 0.28) * 3;
+            ctx.strokeStyle = '#e11d48';
+            ctx.lineWidth = 3.5;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(-r + 2, -5);
+            ctx.quadraticCurveTo(-r - 7, -8 + ribbonWave, -r - 13, -3 - ribbonWave);
+            ctx.moveTo(-r + 2, -3);
+            ctx.quadraticCurveTo(-r - 6, -2 - ribbonWave, -r - 12, 3 + ribbonWave);
+            ctx.stroke();
+
+            // Spherical Shaded Plumage Body
+            const birdGrad = ctx.createRadialGradient(-4, -5, 2, 0, 0, r);
+            birdGrad.addColorStop(0, '#fb7185');
+            birdGrad.addColorStop(0.55, '#ff3366');
+            birdGrad.addColorStop(1, '#9f1239');
+            ctx.fillStyle = birdGrad;
+            ctx.beginPath();
+            ctx.arc(0, 0, r, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Lighter Belly Patch
+            ctx.fillStyle = '#fecdd3';
+            ctx.beginPath();
+            ctx.arc(2, r * 0.55, r * 0.58, Math.PI * 1.1, Math.PI * 1.9);
+            ctx.fill();
+
+            ctx.strokeStyle = '#18181b';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(0, 0, r, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Dark Carbon Ninja Mask Band
+            ctx.fillStyle = '#18181b';
+            ctx.beginPath();
+            ctx.roundRect(-r + 0.5, -7.5, r * 2 - 1, 7.5, 2);
+            ctx.fill();
+
+            // Determined Slanted Ninja Eye & Pupil
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.moveTo(1, -6.5);
+            ctx.lineTo(10, -4.5);
+            ctx.lineTo(9, -1.5);
+            ctx.lineTo(2, -2);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.fillStyle = '#09090b';
+            ctx.beginPath();
+            ctx.arc(6.5, -3.8, 1.4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Sculpted Two-Part Hooked Beak
+            const beakGrad = ctx.createLinearGradient(r - 2, -2, r + 8, 6);
+            beakGrad.addColorStop(0, '#fde047');
+            beakGrad.addColorStop(1, '#d97706');
+            ctx.fillStyle = beakGrad;
+            ctx.strokeStyle = '#18181b';
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.moveTo(r - 2, -2.5);
+            ctx.quadraticCurveTo(r + 6, -1.5, r + 8, 3);
+            ctx.lineTo(r - 2, 3.5);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Lower Mandible
+            ctx.fillStyle = '#b45309';
+            ctx.beginPath();
+            ctx.moveTo(r - 2, 3.5);
+            ctx.lineTo(r + 5, 3.5);
+            ctx.lineTo(r - 2, 6.5);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        }
+    }
+
+    function draw() {
+        ctx.save();
+        if (screenShake > 0) {
+            ctx.translate((Math.random() - 0.5) * screenShake, (Math.random() - 0.5) * screenShake);
+        }
+
+        if (currentTheme === 'skibidi') {
+            drawSkibidiBackground();
+        } else if (currentTheme === 'minecraft') {
+            drawMinecraftBackground();
+        } else if (currentTheme === 'amongus') {
+            drawAmongUsBackground();
+        } else if (currentTheme === 'mario') {
+            drawMarioBackground();
+            drawMarioGround();
+        } else if (currentTheme === 'pacman') {
+            drawPacmanBackground();
+        } else if (currentTheme === 'backrooms') {
+            drawBackroomsBackground();
+        } else {
+            const dark = isDarkLevel();
+            ctx.fillStyle = dark ? '#05050a' : '#121216';
+            ctx.fillRect(0, 0, V_WIDTH, V_HEIGHT);
+            ctx.fillStyle = dark ? '#0f1018' : '#1e1e24';
+            ctx.fillRect(0, GROUND_Y, V_WIDTH, V_HEIGHT - GROUND_Y);
+            ctx.fillStyle = dark ? '#38bdf8' : '#3f3f46';
+            ctx.fillRect(0, GROUND_Y, V_WIDTH, 4);
+        }
+
+        if (currentTheme !== 'mario') {
+            ctx.strokeStyle = '#71717a';
+            ctx.lineWidth = 7;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(anchor.x, GROUND_Y);
+            ctx.lineTo(anchor.x, anchor.y);
+            ctx.stroke();
+        }
+
+        if (gameState === STATE_DRAGGING) {
+            ctx.strokeStyle = '#be123c';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(anchor.x + 8, anchor.y);
+            ctx.lineTo(player.x, player.y);
+            ctx.stroke();
+        }
+
+        drawTrajectoryPreview();
+
+        // Blockers
+        blockers.forEach(b => {
+            if (currentTheme === 'minecraft') {
+                ctx.fillStyle = '#57534e';
+                ctx.fillRect(b.x, b.y, b.w, b.h);
+                ctx.strokeStyle = '#1c1917';
+                ctx.lineWidth = 2.5;
+                ctx.strokeRect(b.x, b.y, b.w, b.h);
+            } else if (currentTheme === 'amongus') {
+                ctx.fillStyle = '#334155';
+                ctx.fillRect(b.x, b.y, b.w, b.h);
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(b.x, b.y, b.w, b.h);
+            } else {
+                ctx.fillStyle = '#27272a';
+                ctx.fillRect(b.x, b.y, b.w, b.h);
+                ctx.strokeStyle = '#52525b';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(b.x, b.y, b.w, b.h);
+            }
+        });
+
+        // Parkour Bounce Walls
+        parkourWalls.forEach(w => {
+            if (currentTheme === 'minecraft') {
+                ctx.fillStyle = '#4ade80';
+                ctx.fillRect(w.x, w.y, w.w, w.h);
+                ctx.strokeStyle = '#15803d';
+                ctx.lineWidth = 2.5;
+                ctx.strokeRect(w.x, w.y, w.w, w.h);
+            } else if (currentTheme === 'skibidi') {
+                ctx.save();
+                ctx.shadowColor = '#38bdf8';
+                ctx.shadowBlur = 14;
+                ctx.fillStyle = '#0284c7';
+                ctx.fillRect(w.x, w.y, w.w, w.h);
+                ctx.restore();
+                ctx.strokeStyle = '#bae6fd';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(w.x, w.y, w.w, w.h);
+            } else if (currentTheme === 'amongus') {
+                ctx.save();
+                ctx.shadowColor = '#22d3ee';
+                ctx.shadowBlur = 12;
+                ctx.fillStyle = '#0891b2';
+                ctx.fillRect(w.x, w.y, w.w, w.h);
+                ctx.restore();
+                ctx.strokeStyle = '#cffafe';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(w.x, w.y, w.w, w.h);
+            } else {
+                ctx.save();
+                ctx.shadowColor = '#0284c7';
+                ctx.shadowBlur = 12;
+                ctx.fillStyle = '#0ea5e9';
+                ctx.fillRect(w.x, w.y, w.w, w.h);
+                ctx.restore();
+                ctx.strokeStyle = '#bae6fd';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(w.x, w.y, w.w, w.h);
+            }
+        });
+
+        // Boss Renderer
+        if (target.alive || target.squashedTimer > 0) {
+            if (currentTheme === 'skibidi') {
+                drawSkibidiToiletBoss(target, !target.alive);
+            } else if (currentTheme === 'minecraft') {
+                drawCreeperBoss(target, !target.alive);
+            } else if (currentTheme === 'amongus') {
+                drawImpostorBoss(target, !target.alive);
+            } else if (currentTheme === 'mario') {
+                drawRealisticGoomba(target, !target.alive);
+            } else if (currentTheme === 'pacman') {
+                drawPinkyGhost(target, !target.alive);
+            } else if (currentTheme === 'backrooms') {
+                drawBacteriaBoss(target, !target.alive);
+            } else {
+                drawRegularBoss(target, !target.alive);
+            }
+        }
+
+        // Player Trail
+        player.trail.forEach((t, idx) => {
+            const ratio = idx / player.trail.length;
+            ctx.fillStyle = `rgba(255, 51, 102, ${ratio * 0.4})`;
+            ctx.beginPath();
+            ctx.arc(t.x, t.y, player.radius * ratio * 0.85, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        // Player Avatar
+        ctx.save();
+        ctx.translate(player.x, player.y);
+        if (warpAnim.active) ctx.scale(warpAnim.playerScale, warpAnim.playerScale);
+        ctx.rotate(player.rotation);
+        drawPlayerAvatarByTheme();
+        ctx.restore();
+
+        if (currentTheme === 'mario') {
+            drawWarpPipe(anchor.x, getMarioPipeTopY());
+        }
+
+        if (gameState === STATE_DRAGGING) {
+            ctx.strokeStyle = '#ff3366';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(anchor.x - 8, anchor.y);
+            ctx.lineTo(player.x, player.y);
+            ctx.stroke();
+        }
+
+        particles.forEach(p => {
+            ctx.globalAlpha = Math.max(0, p.alpha);
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+        ctx.globalAlpha = 1;
+
+        if (warpAnim.active) {
+            ctx.save();
+            ctx.fillStyle = '#000000';
+            ctx.beginPath();
+            ctx.rect(0, 0, V_WIDTH, V_HEIGHT);
+            ctx.arc(anchor.x, anchor.y, Math.max(0, warpAnim.irisRadius), 0, Math.PI * 2, true);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        ctx.restore();
+    }
+
+    function loop() {
+        update();
+        draw();
+        requestAnimationFrame(loop);
+    }
+
+    loadLevel(0);
+    loop();
+})();
+</script>
+
+</body>
+</html>
+
+<!-- 
+https://itch.io/game-assets/free/tag-2d/tag-music
+
+General Sound Effects
+
+
+https://sounds.spriters-resource.com/nes/supermariobros/asset/393915/
+
+
+Mario SOund Effects
+
+
+https://downloads.khinsider.com/game-soundtracks/album/pac-man-game-sound-effect-original-soundtrack-2024
+-->
+
+
+
